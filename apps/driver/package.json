@@ -1,0 +1,13 @@
+{
+  "name": "@boutique/driver",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Espace livreur — application Next.js indépendante (contexte propre).",
+  "scripts": {
+    "dev": "node ../../scripts/run-app.mjs driver 3003",
+    "build": "node ../../scripts/run-app.mjs driver 3003 build",
+    "start": "node ../../scripts/run-app.mjs driver 3003 start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint"
+  }
+}
