@@ -1,0 +1,11 @@
+
+# Generated/local files - GitHub cleanup
+**/node_modules/
+**/.next/
+**/test-results/
+**/playwright-report/
+**/blob-report/
+**/coverage/
+**/*.tsbuildinfo
+.env.local
+.env.test
