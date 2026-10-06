@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -19,9 +23,14 @@
       }
     ],
     "paths": {
-      "@app-config/env": ["./lib/app-config.ts"],
-      "@/*": ["./*"]
-    }
+      "@app-config/env": [
+        "./lib/app-config.ts"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
@@ -31,5 +40,8 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "apps"]
+  "exclude": [
+    "node_modules",
+    "apps"
+  ]
 }
