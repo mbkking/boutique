@@ -1,0 +1,319 @@
+@import "tailwindcss";
+
+/*
+ * Sources à analyser.
+ *
+ * Tailwind v4 détecte automatiquement les fichiers à analyser à partir du
+ * dossier du fichier CSS. Or ce fichier est compilé par les trois applications
+ * (`apps/client`, `apps/admin`, `apps/driver`) alors que tout le design vit
+ * dans des dossiers frères : `app/`, `components/`, `lib/`. Sans ces
+ * déclarations, aucune classe n'était générée et les applications
+ * s'affichaient sans style.
+ *
+ * Ces lignes ne changent pas le design : elles indiquent seulement *où* se
+ * trouvent les classes utilisées.
+ */
+@source "../app";
+@source "../components";
+@source "../lib";
+@source "../apps";
+
+@theme {
+  /* Palette ISF NAF-CHOPOP : teal profond + or (cf. logo). */
+  --color-primary: #1e2a2d;
+  --color-primary-light: #35565c;
+  --color-primary-dark: #141d20;
+  --color-primary-50: #f0f4f5;
+  --color-primary-100: #e0e9eb;
+  --color-secondary: #c6a15b;
+  --color-secondary-light: #d9b978;
+  --color-secondary-dark: #a8854a;
+  --color-success: #16a34a;
+  --color-success-light: #22c55e;
+  --color-danger: #dc2626;
+  --color-danger-light: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #0ea5e9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8fafc;
+  --color-surface-warm: #fefce8;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-light: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 10px 25px -5px rgb(0 0 0 / 0.08), 0 4px 10px -4px rgb(0 0 0 / 0.06);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  --transition-fast: 150ms;
+  --transition-base: 200ms;
+  --transition-slow: 300ms;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@utility tap-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+@utility focus-ring {
+  outline: 2px solid var(--color-primary-light);
+  outline-offset: 2px;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility bg-hero-pattern {
+  background-image: radial-gradient(ellipse at 20% 50%, rgb(30 42 45 / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgb(198 161 91 / 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgb(30 42 45 / 0.04) 0%, transparent 50%);
+}
+
+@utility bg-section-gradient {
+  background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-alt) 100%);
+}
+
+@utility card-hover {
+  transition: transform var(--transition-base) ease, box-shadow var(--transition-base) ease;
+}
+
+@utility card-hover-lift {
+  transition: transform var(--transition-base) ease, box-shadow var(--transition-base) ease;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+  }
+}
+
+@utility image-zoom {
+  transition: transform var(--transition-slow) ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+@utility badge-bounce {
+  animation: badge-bounce 0.3s ease;
+}
+
+@keyframes badge-bounce {
+  0% { transform: scale(0.5); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================================
+   Thème du back-office (ADMIN → Paramètres → Apparence)
+   ============================================================
+   Le thème est porté par des variables `--admin-*` posées sur la
+   racine de l'admin (`.admin-theme`). Cette couche se contente de
+   les reporter sur les classes réellement utilisées par les pages
+   d'administration : les composants restent écrits une seule fois,
+   et l'apparence est pilotée entièrement depuis les paramètres.
+
+   Les variables `--color-*` (design system) sont elles aussi
+   surchargées dans cette portée : `Card`, `Button`, `Input`, `Badge`
+   utilisent ces jetons et suivent donc le thème sans modification.
+   ============================================================ */
+.admin-theme {
+  background-color: var(--admin-background);
+  color: var(--admin-text);
+}
+
+/* Surfaces : cartes, en-tête, barre latérale, menus. */
+.admin-theme .bg-white,
+.admin-theme [data-admin-surface] {
+  background-color: var(--admin-card-background);
+}
+
+.admin-theme .bg-gray-50 {
+  background-color: var(--admin-background);
+}
+
+.admin-theme .bg-gray-100 {
+  background-color: var(--admin-primary-soft);
+}
+
+.admin-theme .bg-primary {
+  background-color: var(--admin-primary);
+}
+
+.admin-theme .bg-primary-50,
+.admin-theme .bg-primary-100 {
+  background-color: var(--admin-primary-soft);
+}
+
+/* Textes */
+.admin-theme .text-gray-900,
+.admin-theme .text-text {
+  color: var(--admin-card-title);
+}
+
+.admin-theme .text-gray-700,
+.admin-theme .text-gray-800 {
+  color: var(--admin-card-text);
+}
+
+.admin-theme .text-gray-600,
+.admin-theme .text-gray-500,
+.admin-theme .text-gray-400,
+.admin-theme .text-text-muted {
+  color: var(--admin-muted-text);
+}
+
+.admin-theme .text-primary,
+.admin-theme .text-primary-light {
+  color: var(--admin-accent);
+}
+
+/* Bordures et séparateurs */
+.admin-theme .border-gray-100,
+.admin-theme .border-gray-200,
+.admin-theme .border-gray-300,
+.admin-theme .border-border {
+  border-style: var(--admin-border-style);
+  border-width: var(--admin-border-width);
+  border-color: var(--admin-card-border);
+}
+
+.admin-theme .divide-gray-100 > * + * {
+  border-color: var(--admin-card-border);
+}
+
+/* Champs de saisie */
+.admin-theme input,
+.admin-theme select,
+.admin-theme textarea {
+  background-color: var(--admin-input-background);
+  border-color: var(--admin-input-border);
+  /* Le rayon des éléments s'applique aux champs : il est ainsi perceptible. */
+  border-radius: var(--admin-radius);
+}
+
+/* Liens du contenu, sauf ceux qui portent déjà une couleur explicite
+   (navigation, badges, boutons) : le thème ne doit pas repeindre la barre
+   latérale. */
+.admin-theme main a:not([class*="text-gray"]):not([class*="text-primary"]) {
+  color: var(--admin-link);
+}
+
+/* Formes : uniquement les rayons explicites, jamais `rounded-full`
+   (avatars, pastilles) qui doivent rester circulaires. */
+.admin-theme .rounded,
+.admin-theme .rounded-md,
+.admin-theme .rounded-lg,
+.admin-theme .rounded-xl,
+.admin-theme .rounded-2xl {
+  border-radius: var(--admin-card-radius);
+}
+
+.admin-theme .rounded-sm {
+  border-radius: var(--admin-radius);
+}
+
+/* Ombres */
+.admin-theme .shadow,
+.admin-theme .shadow-sm,
+.admin-theme .shadow-md,
+.admin-theme .shadow-lg,
+.admin-theme .shadow-card,
+.admin-theme .shadow-card-hover {
+  box-shadow: var(--admin-card-shadow);
+}
+
+/* Boutons */
+.admin-theme [data-admin-button] {
+  background-color: var(--admin-button-background);
+  color: var(--admin-button-text);
+  border-radius: var(--admin-radius);
+}
+
+.admin-theme [data-admin-button]:hover {
+  background-color: var(--admin-button-hover);
+}
+
+.admin-theme [data-admin-button]:focus-visible {
+  outline: 2px solid var(--admin-accent);
+  outline-offset: 2px;
+}
+
+.admin-theme [data-admin-button]:disabled {
+  opacity: 0.6;
+}
+
+/* Badges */
+.admin-theme [data-admin-badge] {
+  background-color: var(--admin-badge-background);
+  color: var(--admin-badge-text);
+  border-color: var(--admin-badge-border);
+}
+
+/* Champs de formulaire (aperçu et formulaires de l'admin) */
+.admin-theme [data-admin-input] {
+  background-color: var(--admin-input-background);
+  border-color: var(--admin-input-border);
+}
+
+/* Les accents de statut (succès, alerte, danger) restent lisibles :
+   ils ne sont pas recolorés par le thème, faute de counterpart
+   défini côté administrateur. */
