@@ -5,8 +5,8 @@
   "description": "Administration — application Next.js indépendante (contexte propre).",
   "scripts": {
     "dev": "node ../../scripts/run-app.mjs admin 3002",
-    "build": "node ../../scripts/run-app.mjs admin 3002 build",
-    "start": "node ../../scripts/run-app.mjs admin 3002 start",
+    "build": "next build",
+    "start": "next start",
     "typecheck": "tsc --noEmit",
     "lint": "eslint"
   },
