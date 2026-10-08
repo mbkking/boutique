@@ -83,23 +83,60 @@ export function ServiceWorkerRegistrar() {
     };
 
     const showUpdatePrompt = (worker: ServiceWorker) => {
-      if (!window.confirm(
-        "Une nouvelle version d'ISF NAF-CHOPOP est disponible.\n\n" +
-          "Voulez-vous l'installer maintenant ? La page va se recharger."
-      )) {
-        return;
-      }
+      // Évite les doublons si on reçoit l'événement plusieurs fois.
+      if (document.getElementById("sw-update-toast")) return;
 
-      // Le message active la version en attente ; `controllerchange` recharge
-      // une seule fois, après que le nouveau worker contrôle la page.
-      let reloading = false;
-      navigator.serviceWorker.addEventListener("controllerchange", () => {
-        if (reloading) return;
-        reloading = true;
-        window.location.reload();
+      const style = document.createElement("style");
+      style.textContent = `
+        #sw-update-toast {
+          position: fixed;
+          left: 50%;
+          bottom: 24px;
+          transform: translateX(-50%);
+          z-index: 9999;
+          background: linear-gradient(135deg, #0f766e, #115e59);
+          color: #fff;
+          padding: 16px 20px;
+          border-radius: 16px;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+          font-family: system-ui, sans-serif;
+          max-width: min(90vw, 420px);
+          text-align: center;
+        }
+        #sw-update-toast h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
+        #sw-update-toast p { margin: 0 0 12px; font-size: 13px; opacity: 0.92; }
+        #sw-update-toast button {
+          background: #f59e0b;
+          color: #111;
+          border: none;
+          padding: 10px 22px;
+          border-radius: 9999px;
+          font-weight: 700;
+          font-size: 14px;
+          cursor: pointer;
+        }
+      `;
+      document.head.appendChild(style);
+
+      const toast = document.createElement("div");
+      toast.id = "sw-update-toast";
+      toast.innerHTML = `
+        <h3>✨ Nouvelle version d'ISF NAF-CHOPOP</h3>
+        <p>Une nouvelle version de l'application est prête, avec des améliorations et corrections. Mettez-la à jour pour profiter de la meilleure expérience.</p>
+        <button id="sw-update-btn" type="button">Mettre à jour maintenant</button>
+      `;
+      document.body.appendChild(toast);
+
+      document.getElementById("sw-update-btn")?.addEventListener("click", () => {
+        let reloading = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          if (reloading) return;
+          reloading = true;
+          window.location.reload();
+        });
+
+        worker.postMessage({ type: "SKIP_WAITING" });
       });
-
-      worker.postMessage({ type: "SKIP_WAITING" });
     };
 
     // L'enregistrement après `load` évite de concurrencer le chargement initial.
