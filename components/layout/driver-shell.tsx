@@ -180,7 +180,7 @@ export function DriverShell({
                   <p className="text-xs text-gray-500">Livreur</p>
                 </div>
                 <Link
-                  href="/livreur/profil"
+                  href={basePath === "/livreur" ? "/livreur/profil" : "/driver/profil"}
                   className="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                   onClick={() => setUserMenuOpen(false)}
                 >

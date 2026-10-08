@@ -645,18 +645,42 @@ export async function deleteProductAction(
     ]);
 
     if (toList(ordersOutcome).length > 0) {
+      await logAuditEntry(supabase, {
+        actor_id: auth.profile.id,
+        actor_role: auth.profile.role,
+        action: AUDIT_ACTIONS.DELETE_REFUSED,
+        entity_type: "product",
+        entity_id: productId,
+        after: { reason: "order_history" },
+      });
       return failure(
-        "Ce produit a été commandé : son historique fait partie des commandes. Archivez-le plutôt que de le supprimer."
+        "Suppression impossible : ce produit a été commandé, son historique fait partie des commandes. Archivez-le plutôt que de le supprimer."
       );
     }
     if (toList(movementsOutcome).length > 0) {
+      await logAuditEntry(supabase, {
+        actor_id: auth.profile.id,
+        actor_role: auth.profile.role,
+        action: AUDIT_ACTIONS.DELETE_REFUSED,
+        entity_type: "product",
+        entity_id: productId,
+        after: { reason: "stock_movements" },
+      });
       return failure(
-        "Ce produit possède un historique de mouvements de stock. Archivez-le plutôt que de le supprimer."
+        "Suppression impossible : ce produit possède un historique de mouvements de stock. Archivez-le plutôt que de le supprimer."
       );
     }
     if (toList(cartOutcome).length > 0) {
+      await logAuditEntry(supabase, {
+        actor_id: auth.profile.id,
+        actor_role: auth.profile.role,
+        action: AUDIT_ACTIONS.DELETE_REFUSED,
+        entity_type: "product",
+        entity_id: productId,
+        after: { reason: "active_carts" },
+      });
       return failure(
-        "Ce produit est encore dans le panier d'un client. Archivez-le plutôt que de le supprimer."
+        "Suppression impossible : ce produit est encore dans le panier d'un client. Archivez-le plutôt que de le supprimer."
       );
     }
   }
@@ -1156,8 +1180,16 @@ export async function deleteCategoryAction(
   );
 
   if (toSingle(productsOutcome)) {
+    await logAuditEntry(supabase, {
+      actor_id: auth.profile.id,
+      actor_role: auth.profile.role,
+      action: AUDIT_ACTIONS.DELETE_REFUSED,
+      entity_type: "category",
+      entity_id: parsed.data.id,
+      after: { reason: "products_present" },
+    });
     return failure(
-      "Cette catégorie contient encore des produits. Désactivez-la plutôt que de la supprimer."
+      "Suppression impossible : cette catégorie contient encore des produits. Désactivez-la plutôt que de la supprimer."
     );
   }
 
@@ -1166,7 +1198,15 @@ export async function deleteCategoryAction(
   );
 
   if (toSingle(childrenOutcome)) {
-    return failure("Cette catégorie possède des sous-catégories. Supprimez-les d'abord.");
+    await logAuditEntry(supabase, {
+      actor_id: auth.profile.id,
+      actor_role: auth.profile.role,
+      action: AUDIT_ACTIONS.DELETE_REFUSED,
+      entity_type: "category",
+      entity_id: parsed.data.id,
+      after: { reason: "child_categories" },
+    });
+    return failure("Suppression impossible : cette catégorie possède des sous-catégories. Supprimez-les d'abord.");
   }
 
   // Le visuel est lu avant la suppression : la ligne disparaît, pas le fichier.

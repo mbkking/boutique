@@ -1,0 +1,754 @@
+{
+  "mode": "APPLY",
+  "candidates": [
+    {
+      "table": "products",
+      "id": "d594b999-5bb3-4aeb-b423-69c68563c08c",
+      "name": "E2E produit muvfcpt0",
+      "created_at": "2026-10-05T15:49:51.562563+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "ee40b377-571e-45a5-b976-645beaeab61e",
+      "name": "E2E produit muvfdwmg",
+      "created_at": "2026-10-05T15:50:39.453322+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "34a1459d-e492-4da3-a19a-1f8586b3ca84",
+      "name": "E2E produit muvfissr",
+      "created_at": "2026-10-05T15:54:30.350127+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "3debcb49-dbcd-4fed-8946-b0448e80f722",
+      "name": "E2E produit muvg4w6x",
+      "created_at": "2026-10-05T16:11:39.873767+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "17f18e47-0121-47a7-8f36-e371a8e4040c",
+      "name": "E2E produit muvqimg5",
+      "created_at": "2026-10-05T21:02:15.778893+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "e4c0eaad-cac4-4adc-9b0a-4067fbc38cda",
+      "name": "E2E produit muvgn2ri",
+      "created_at": "2026-10-05T16:25:50.163845+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "2b073d14-d415-4fe2-86b5-c126dbc129fa",
+      "name": "E2E produit muvfmdr8",
+      "created_at": "2026-10-05T15:57:15.065431+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "b6589e8e-d6b3-4109-8e8b-c173815a3c7f",
+      "name": "E2E produit muvpq7wm",
+      "created_at": "2026-10-05T20:40:12.697947+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "a55e147c-7ac8-4f4c-b09c-563dde84c1ec",
+      "name": "E2E produit muvpi53o",
+      "created_at": "2026-10-05T20:34:00.843015+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "933a32fc-c52b-4cde-8e75-af40468f9a4b",
+      "name": "E2E produit muvh8irn",
+      "created_at": "2026-10-05T16:42:27.712836+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "a39c2255-7a67-4108-b9d5-b15520102cf3",
+      "name": "E2E produit muvgapug",
+      "created_at": "2026-10-05T16:16:09.789477+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "ec2eb6a5-1609-4f9a-901b-2eb71df640a5",
+      "name": "E2E produit muvh0mft",
+      "created_at": "2026-10-05T16:36:21.396151+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "categories",
+      "id": "f1fd2019-6820-4dc1-b4a3-9392e672d2a1",
+      "name": "E2E cat muvdtsm2 modifiée",
+      "created_at": "2026-10-05T15:06:12.319662+00:00",
+      "reason": "nom/slug de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "categories",
+      "id": "6109d050-fe7f-455b-9e55-0ce717f50bde",
+      "name": "E2E cat muve5ekm modifiée",
+      "created_at": "2026-10-05T15:15:12.900402+00:00",
+      "reason": "nom/slug de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "categories",
+      "id": "19365219-27c1-4231-9d81-0a8cb3f52c74",
+      "name": "E2E cat muvecsgi modifiée",
+      "created_at": "2026-10-05T15:20:56.972911+00:00",
+      "reason": "nom/slug de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "categories",
+      "id": "38b7fc94-2581-4236-9231-9245c8d482d1",
+      "name": "E2E cat muvfcpt0 modifiée",
+      "created_at": "2026-10-05T15:48:52.036247+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "70a4e98d-ee5b-44fd-9489-3b935d90eee3",
+      "name": "E2E cat muvfdwmg modifiée",
+      "created_at": "2026-10-05T15:49:48.502652+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "2d5c8226-8254-48a8-bf1f-fa6219ad0572",
+      "name": "E2E cat muvqimg5 modifiée",
+      "created_at": "2026-10-05T21:01:23.622008+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "7baa5666-1a24-445e-8132-7d4a8123b9f2",
+      "name": "E2E cat muvfissr modifiée",
+      "created_at": "2026-10-05T15:53:35.727524+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "3410eac0-b756-4fad-8ddb-609dd44907ee",
+      "name": "E2E cat muvh0mft modifiée",
+      "created_at": "2026-10-05T16:35:28.530088+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "709a8df2-96c2-48f3-a236-3e9f545dcc4b",
+      "name": "E2E cat muvfmdr8 modifiée",
+      "created_at": "2026-10-05T15:56:23.309346+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "299735ae-ef26-49fd-8b91-84d171e97f87",
+      "name": "E2E cat muvg4w6x modifiée",
+      "created_at": "2026-10-05T16:10:47.52932+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "22d12370-fe77-4bb4-bf2b-f8b844e754ad",
+      "name": "E2E cat muvgapug modifiée",
+      "created_at": "2026-10-05T16:15:18.855157+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "f7d6fb16-7f0b-4e97-a5a6-3a80be5200d1",
+      "name": "E2E cat muvh8irn modifiée",
+      "created_at": "2026-10-05T16:41:36.844118+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "f95a3836-aa5d-419a-aca0-8fd4a122962a",
+      "name": "E2E cat muvgn2ri modifiée",
+      "created_at": "2026-10-05T16:24:56.27343+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "c19388b7-4251-4786-bc48-4bf6df97ef62",
+      "name": "E2E cat muvpi53o modifiée",
+      "created_at": "2026-10-05T20:33:03.209557+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "346530ff-9dcb-4fd9-ade6-41c53de82671",
+      "name": "E2E cat muvpq7wm modifiée",
+      "created_at": "2026-10-05T20:39:17.477681+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "coupons",
+      "id": "c90e3bf5-3b14-47ae-b777-b72dad7df386",
+      "name": "E2EMUTWVBKM",
+      "created_at": "2026-10-04T14:23:52.061186+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "84cbe1db-5ba0-403f-8766-6056a46b53d7",
+      "name": "E2EMUTXHUQV",
+      "created_at": "2026-10-04T14:41:21.606267+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "5f846196-d466-4be2-a448-fda025983f7d",
+      "name": "E2EMUTXPQIM",
+      "created_at": "2026-10-04T14:47:28.835941+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "4edf3500-61c0-43e3-9a63-a3c93dad2a07",
+      "name": "E2EMUU1QTDR",
+      "created_at": "2026-10-04T16:40:31.957705+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "ecc08c42-6203-49c8-a431-07de8679e4e6",
+      "name": "E2EMUTYQPHN",
+      "created_at": "2026-10-04T15:16:15.824851+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "8f9dbb08-6b65-4b51-b18c-3ab1b3353389",
+      "name": "E2EMUTYXEJZ",
+      "created_at": "2026-10-04T15:21:25.994255+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "02a4187b-0f97-4ca0-b194-380836124cf1",
+      "name": "E2EMUTZ66S2",
+      "created_at": "2026-10-04T15:28:15.534356+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "ef972e9d-5cbb-49a6-ad88-8897ce498deb",
+      "name": "E2EMUTZDHKI",
+      "created_at": "2026-10-04T15:33:58.837836+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "f40894c5-9242-4570-a5f6-d394c01d866e",
+      "name": "E2EMUTZQ6HZ",
+      "created_at": "2026-10-04T15:43:48.600312+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "bf36bb79-2bb1-4332-94e8-eba31694b35b",
+      "name": "E2EMUU1YRO4",
+      "created_at": "2026-10-04T16:46:36.570076+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "500f0199-a9d3-4ce4-82a0-edc5c2fcb584",
+      "name": "E2EMUTZXKMI",
+      "created_at": "2026-10-04T15:49:34.874301+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "429ec0cd-945b-4a24-9226-6572630a1c54",
+      "name": "E2EMUU03KGX",
+      "created_at": "2026-10-04T15:54:15.067717+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "9f3d6eae-8550-46b9-86d8-6f6e59eb1419",
+      "name": "E2EMUU07MUD",
+      "created_at": "2026-10-04T15:57:24.232445+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "8e8e2813-8064-4d63-8774-6f4839be9c3c",
+      "name": "E2EMUU0EPMG",
+      "created_at": "2026-10-04T16:02:55.330634+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "df44478d-f2c9-49ea-9d69-5fbcd7c81306",
+      "name": "E2EMUU0LEAQ",
+      "created_at": "2026-10-04T16:08:06.006853+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "00f20e08-f845-4f81-8d9a-062b342b5fee",
+      "name": "E2EMUVHIHU0",
+      "created_at": "2026-10-05T16:49:32.918815+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "b3e23fc6-6841-4404-b6d2-27e5052230d0",
+      "name": "E2EMUU1AI5I",
+      "created_at": "2026-10-04T16:27:44.776397+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "00229ebb-e1b7-44ed-b09b-8baca06df427",
+      "name": "E2EMUU1J9U0",
+      "created_at": "2026-10-04T16:34:31.396688+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "7df994ed-d701-4d8c-b77b-0cfe212d2d47",
+      "name": "E2EMUVHZBFA",
+      "created_at": "2026-10-05T17:02:34.583624+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "7a3901b5-0b01-4019-a1c2-fd91bd75e087",
+      "name": "E2EMUVJL68E",
+      "created_at": "2026-10-05T17:47:31.554949+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "66363d0b-4f06-43f9-8154-3d75324cb87b",
+      "name": "E2EMUVK25ZU",
+      "created_at": "2026-10-05T18:00:43.782271+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "e2545b60-b30a-43ee-abde-86e8d0851ce3",
+      "name": "E2EMUVON7UN",
+      "created_at": "2026-10-05T20:09:13.629008+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "b73c24cf-1347-4d49-b10e-e01a3e369a62",
+      "name": "E2EMUVQ17JC",
+      "created_at": "2026-10-05T20:48:02.874116+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "578c603b-8fe4-4136-aed5-ff7a7bcbb2e9",
+      "name": "E2EMUVQEBHP",
+      "created_at": "2026-10-05T20:58:13.202382+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "coupons",
+      "id": "8cc3e00e-c51c-47c5-916b-ec08c479f0ff",
+      "name": "E2EMUVQUC8H",
+      "created_at": "2026-10-05T21:10:39.97943+00:00",
+      "reason": "code/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "f15e3744-c520-43b8-87d2-98505b911808",
+      "name": "Promo E2E mutw9lx9",
+      "created_at": "2026-10-04T14:06:40.274871+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "7fa9134c-d5cf-4349-b5ee-4fb8dc5cd0c3",
+      "name": "Promo E2E mutwaawi",
+      "created_at": "2026-10-04T14:07:12.711122+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "0385af1c-39e2-43d7-97ce-923c14f5698d",
+      "name": "Promo E2E mutwbcew",
+      "created_at": "2026-10-04T14:08:01.487661+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "de746eba-23dd-47f4-b0db-c6f06df7a36b",
+      "name": "Promo E2E muty7sqw",
+      "created_at": "2026-10-04T15:01:15.26017+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "215f74f5-e65a-404b-a330-cf23905b0650",
+      "name": "Promo E2E mutyjpoo",
+      "created_at": "2026-10-04T15:10:30.964932+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "a2fcccfd-f92a-4584-bed4-10d856558b62",
+      "name": "Promo E2E mutypry8",
+      "created_at": "2026-10-04T15:15:13.782475+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "7e976388-d666-445f-ac9d-78004bdd4163",
+      "name": "Promo E2E mutywfr8",
+      "created_at": "2026-10-04T15:20:24.588127+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "300eb401-6941-4dce-bdd9-7c1a1cdd6870",
+      "name": "Promo E2E mutz4zwo",
+      "created_at": "2026-10-04T15:27:03.911182+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "528db4c4-e8ac-4924-a402-b76c5fe522f9",
+      "name": "Promo E2E mutzcbwa",
+      "created_at": "2026-10-04T15:32:45.998654+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "0414f30e-270b-4858-ac94-53d9539476fa",
+      "name": "Promo E2E mutzp311",
+      "created_at": "2026-10-04T15:42:41.167992+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "c57afeba-6d5b-4b81-97c1-d2bc51a25ca2",
+      "name": "Promo E2E mutzwga1",
+      "created_at": "2026-10-04T15:48:24.939957+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "8ded9996-68f0-431b-a8f7-2d57d0ddc49c",
+      "name": "Promo E2E muu06fgs",
+      "created_at": "2026-10-04T15:56:10.375502+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "ee704f72-619d-45a3-a9fa-8daefd8cea95",
+      "name": "Promo E2E muu0doro",
+      "created_at": "2026-10-04T16:01:49.061449+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "69c8aa3f-6e25-4b32-83d3-2cdac5a19d7f",
+      "name": "Promo E2E muu0kgf7",
+      "created_at": "2026-10-04T16:07:04.822606+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "1580f22f-83d3-4462-9264-81148482280b",
+      "name": "Promo E2E muu18xgm",
+      "created_at": "2026-10-04T16:26:07.258473+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "223ab556-dd0d-48ca-9dcb-e919433ce4fb",
+      "name": "Promo E2E muu1hr4m",
+      "created_at": "2026-10-04T16:32:59.011099+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "57a13b2e-777d-4286-b4bc-362969480221",
+      "name": "Promo E2E muu1old9",
+      "created_at": "2026-10-04T16:38:18.098975+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "786bfb2c-8ada-4b8c-9657-550a8f7f6831",
+      "name": "Promo E2E muu48edr",
+      "created_at": "2026-10-04T17:49:41.009874+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "57d9bfb7-957d-4729-9104-7396d09d945a",
+      "name": "Promo E2E muvdsi5x",
+      "created_at": "2026-10-05T15:04:58.348584+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "447fcfd1-1166-48a5-84fe-94bd1dc8fc55",
+      "name": "Promo E2E muvheg6d",
+      "created_at": "2026-10-05T16:46:01.14997+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "f4eecb92-02a7-4965-83dd-bbbe76ac3b3a",
+      "name": "Promo E2E muvpx0hp",
+      "created_at": "2026-10-05T20:44:25.287005+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    },
+    {
+      "table": "promotions",
+      "id": "a98ad520-9eca-46d5-aa94-4e39a7929b59",
+      "name": "Promo E2E muvqp9ei",
+      "created_at": "2026-10-05T21:06:23.095164+00:00",
+      "reason": "nom/description de test",
+      "blocked": false,
+      "action": "DELETE"
+    }
+  ],
+  "deleted": [
+    "categories:e2e-cat-muvdtsm2-modifiee",
+    "categories:e2e-cat-muve5ekm-modifiee",
+    "categories:e2e-cat-muvecsgi-modifiee",
+    "coupons:E2EMUTWVBKM",
+    "coupons:E2EMUTXHUQV",
+    "coupons:E2EMUTXPQIM",
+    "coupons:E2EMUU1QTDR",
+    "coupons:E2EMUTYQPHN",
+    "coupons:E2EMUTYXEJZ",
+    "coupons:E2EMUTZ66S2",
+    "coupons:E2EMUTZDHKI",
+    "coupons:E2EMUTZQ6HZ",
+    "coupons:E2EMUU1YRO4",
+    "coupons:E2EMUTZXKMI",
+    "coupons:E2EMUU03KGX",
+    "coupons:E2EMUU07MUD",
+    "coupons:E2EMUU0EPMG",
+    "coupons:E2EMUU0LEAQ",
+    "coupons:E2EMUVHIHU0",
+    "coupons:E2EMUU1AI5I",
+    "coupons:E2EMUU1J9U0",
+    "coupons:E2EMUVHZBFA",
+    "coupons:E2EMUVJL68E",
+    "coupons:E2EMUVK25ZU",
+    "coupons:E2EMUVON7UN",
+    "coupons:E2EMUVQ17JC",
+    "coupons:E2EMUVQEBHP",
+    "coupons:E2EMUVQUC8H",
+    "promotions:Promo E2E mutw9lx9",
+    "promotions:Promo E2E mutwaawi",
+    "promotions:Promo E2E mutwbcew",
+    "promotions:Promo E2E muty7sqw",
+    "promotions:Promo E2E mutyjpoo",
+    "promotions:Promo E2E mutypry8",
+    "promotions:Promo E2E mutywfr8",
+    "promotions:Promo E2E mutz4zwo",
+    "promotions:Promo E2E mutzcbwa",
+    "promotions:Promo E2E mutzp311",
+    "promotions:Promo E2E mutzwga1",
+    "promotions:Promo E2E muu06fgs",
+    "promotions:Promo E2E muu0doro",
+    "promotions:Promo E2E muu0kgf7",
+    "promotions:Promo E2E muu18xgm",
+    "promotions:Promo E2E muu1hr4m",
+    "promotions:Promo E2E muu1old9",
+    "promotions:Promo E2E muu48edr",
+    "promotions:Promo E2E muvdsi5x",
+    "promotions:Promo E2E muvheg6d",
+    "promotions:Promo E2E muvpx0hp",
+    "promotions:Promo E2E muvqp9ei"
+  ],
+  "skipped": [
+    "products:e2e-produit-muvfcpt0",
+    "products:e2e-produit-muvfdwmg",
+    "products:e2e-produit-muvfissr",
+    "products:e2e-produit-muvg4w6x",
+    "products:e2e-produit-muvqimg5",
+    "products:e2e-produit-muvgn2ri",
+    "products:e2e-produit-muvfmdr8",
+    "products:e2e-produit-muvpq7wm",
+    "products:e2e-produit-muvpi53o",
+    "products:e2e-produit-muvh8irn",
+    "products:e2e-produit-muvgapug",
+    "products:e2e-produit-muvh0mft",
+    "categories:e2e-cat-muvfcpt0-modifiee",
+    "categories:e2e-cat-muvfdwmg-modifiee",
+    "categories:e2e-cat-muvqimg5-modifiee",
+    "categories:e2e-cat-muvfissr-modifiee",
+    "categories:e2e-cat-muvh0mft-modifiee",
+    "categories:e2e-cat-muvfmdr8-modifiee",
+    "categories:e2e-cat-muvg4w6x-modifiee",
+    "categories:e2e-cat-muvgapug-modifiee",
+    "categories:e2e-cat-muvh8irn-modifiee",
+    "categories:e2e-cat-muvgn2ri-modifiee",
+    "categories:e2e-cat-muvpi53o-modifiee",
+    "categories:e2e-cat-muvpq7wm-modifiee"
+  ],
+  "preserved": [
+    "utilisateur test NON supprimé: aaaaa@gmail.com (customer)",
+    "utilisateur test NON supprimé: client-b.1791193373843@exemple.ne (customer)",
+    "utilisateur test NON supprimé: client.test@exemple.ne (customer)"
+  ]
+}

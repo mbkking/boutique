@@ -1,10 +1,32 @@
+import { guardPage } from "@/lib/auth/guard";
+import { PERMISSIONS } from "@/lib/auth/permissions";
+import { DriverShell } from "@/components/layout/driver-shell";
+
 /**
- * Route de l'application `driver`, ré-exportée depuis le code partagé.
+ * Layout serveur de l'espace livreur.
  *
- * Source : `(delivery)\driver\layout.tsx` (dépôt racine).
- *
- * Aucun code métier n'est dupliqué : l'application ne fait que déclarer
- * qu'elle sert cette route, avec son propre contexte Next.
+ * La vérification des droits s'exécute sur le serveur avant tout rendu : aucune
+ * donnée de tournée n'est envoyée à un visiteur non autorisé.
+ * Rendue à la demande, car elle dépend de la session.
  */
-export * from "@repo/app/(delivery)/driver/layout";
-export { default } from "@repo/app/(delivery)/driver/layout";
+export const dynamic = "force-dynamic";
+
+export default async function DriverLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // Un livreur n'accède qu'à ses missions : `DELIVERY_READ_ALL` n'est pas
+  // requis, ce qui garantit qu'il ne peut pas lister les commandes de
+  // l'entreprise même en tapant l'URL directement.
+  const profile = await guardPage([
+    PERMISSIONS.DELIVERY_READ_OWN,
+    PERMISSIONS.DELIVERY_READ_ALL,
+  ]);
+
+  return (
+    <DriverShell fullName={profile.full_name} phone={profile.phone} stats={null}>
+      {children}
+    </DriverShell>
+  );
+}

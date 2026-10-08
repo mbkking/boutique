@@ -1,0 +1,253 @@
+{
+  "mode": "DRY-RUN",
+  "candidates": [
+    {
+      "table": "products",
+      "id": "d594b999-5bb3-4aeb-b423-69c68563c08c",
+      "name": "E2E produit muvfcpt0",
+      "created_at": "2026-10-05T15:49:51.562563+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "ee40b377-571e-45a5-b976-645beaeab61e",
+      "name": "E2E produit muvfdwmg",
+      "created_at": "2026-10-05T15:50:39.453322+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "34a1459d-e492-4da3-a19a-1f8586b3ca84",
+      "name": "E2E produit muvfissr",
+      "created_at": "2026-10-05T15:54:30.350127+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "3debcb49-dbcd-4fed-8946-b0448e80f722",
+      "name": "E2E produit muvg4w6x",
+      "created_at": "2026-10-05T16:11:39.873767+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "17f18e47-0121-47a7-8f36-e371a8e4040c",
+      "name": "E2E produit muvqimg5",
+      "created_at": "2026-10-05T21:02:15.778893+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "e4c0eaad-cac4-4adc-9b0a-4067fbc38cda",
+      "name": "E2E produit muvgn2ri",
+      "created_at": "2026-10-05T16:25:50.163845+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "2b073d14-d415-4fe2-86b5-c126dbc129fa",
+      "name": "E2E produit muvfmdr8",
+      "created_at": "2026-10-05T15:57:15.065431+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "b6589e8e-d6b3-4109-8e8b-c173815a3c7f",
+      "name": "E2E produit muvpq7wm",
+      "created_at": "2026-10-05T20:40:12.697947+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "a55e147c-7ac8-4f4c-b09c-563dde84c1ec",
+      "name": "E2E produit muvpi53o",
+      "created_at": "2026-10-05T20:34:00.843015+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "933a32fc-c52b-4cde-8e75-af40468f9a4b",
+      "name": "E2E produit muvh8irn",
+      "created_at": "2026-10-05T16:42:27.712836+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "a39c2255-7a67-4108-b9d5-b15520102cf3",
+      "name": "E2E produit muvgapug",
+      "created_at": "2026-10-05T16:16:09.789477+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "products",
+      "id": "ec2eb6a5-1609-4f9a-901b-2eb71df640a5",
+      "name": "E2E produit muvh0mft",
+      "created_at": "2026-10-05T16:36:21.396151+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (historique)"
+    },
+    {
+      "table": "categories",
+      "id": "38b7fc94-2581-4236-9231-9245c8d482d1",
+      "name": "E2E cat muvfcpt0 modifiée",
+      "created_at": "2026-10-05T15:48:52.036247+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "70a4e98d-ee5b-44fd-9489-3b935d90eee3",
+      "name": "E2E cat muvfdwmg modifiée",
+      "created_at": "2026-10-05T15:49:48.502652+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "2d5c8226-8254-48a8-bf1f-fa6219ad0572",
+      "name": "E2E cat muvqimg5 modifiée",
+      "created_at": "2026-10-05T21:01:23.622008+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "7baa5666-1a24-445e-8132-7d4a8123b9f2",
+      "name": "E2E cat muvfissr modifiée",
+      "created_at": "2026-10-05T15:53:35.727524+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "3410eac0-b756-4fad-8ddb-609dd44907ee",
+      "name": "E2E cat muvh0mft modifiée",
+      "created_at": "2026-10-05T16:35:28.530088+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "709a8df2-96c2-48f3-a236-3e9f545dcc4b",
+      "name": "E2E cat muvfmdr8 modifiée",
+      "created_at": "2026-10-05T15:56:23.309346+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "299735ae-ef26-49fd-8b91-84d171e97f87",
+      "name": "E2E cat muvg4w6x modifiée",
+      "created_at": "2026-10-05T16:10:47.52932+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "22d12370-fe77-4bb4-bf2b-f8b844e754ad",
+      "name": "E2E cat muvgapug modifiée",
+      "created_at": "2026-10-05T16:15:18.855157+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "f7d6fb16-7f0b-4e97-a5a6-3a80be5200d1",
+      "name": "E2E cat muvh8irn modifiée",
+      "created_at": "2026-10-05T16:41:36.844118+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "f95a3836-aa5d-419a-aca0-8fd4a122962a",
+      "name": "E2E cat muvgn2ri modifiée",
+      "created_at": "2026-10-05T16:24:56.27343+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "c19388b7-4251-4786-bc48-4bf6df97ef62",
+      "name": "E2E cat muvpi53o modifiée",
+      "created_at": "2026-10-05T20:33:03.209557+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    },
+    {
+      "table": "categories",
+      "id": "346530ff-9dcb-4fd9-ade6-41c53de82671",
+      "name": "E2E cat muvpq7wm modifiée",
+      "created_at": "2026-10-05T20:39:17.477681+00:00",
+      "reason": "nom/slug de test",
+      "blocked": true,
+      "action": "SKIP (produits restants)"
+    }
+  ],
+  "deleted": [],
+  "skipped": [
+    "products:e2e-produit-muvfcpt0",
+    "products:e2e-produit-muvfdwmg",
+    "products:e2e-produit-muvfissr",
+    "products:e2e-produit-muvg4w6x",
+    "products:e2e-produit-muvqimg5",
+    "products:e2e-produit-muvgn2ri",
+    "products:e2e-produit-muvfmdr8",
+    "products:e2e-produit-muvpq7wm",
+    "products:e2e-produit-muvpi53o",
+    "products:e2e-produit-muvh8irn",
+    "products:e2e-produit-muvgapug",
+    "products:e2e-produit-muvh0mft",
+    "categories:e2e-cat-muvfcpt0-modifiee",
+    "categories:e2e-cat-muvfdwmg-modifiee",
+    "categories:e2e-cat-muvqimg5-modifiee",
+    "categories:e2e-cat-muvfissr-modifiee",
+    "categories:e2e-cat-muvh0mft-modifiee",
+    "categories:e2e-cat-muvfmdr8-modifiee",
+    "categories:e2e-cat-muvg4w6x-modifiee",
+    "categories:e2e-cat-muvgapug-modifiee",
+    "categories:e2e-cat-muvh8irn-modifiee",
+    "categories:e2e-cat-muvgn2ri-modifiee",
+    "categories:e2e-cat-muvpi53o-modifiee",
+    "categories:e2e-cat-muvpq7wm-modifiee"
+  ],
+  "preserved": [
+    "utilisateur test NON supprimé: aaaaa@gmail.com (customer)",
+    "utilisateur test NON supprimé: client-b.1791193373843@exemple.ne (customer)",
+    "utilisateur test NON supprimé: client.test@exemple.ne (customer)"
+  ]
+}

@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const ctx = await b.newContext();
+const p = await ctx.newPage();
+await p.goto('https://boutique-client-two.vercel.app/products/bab', { waitUntil: 'networkidle' });
+await p.locator('button:has-text("Ajouter au panier")').click();
+await p.waitForTimeout(2500);
+console.log((await p.locator('body').innerText()).match(/.{0,60}(panier|Panier).{0,60}/g)?.slice(0, 3));
+await p.goto('https://boutique-client-two.vercel.app/cart', { waitUntil: 'networkidle' });
+console.log('=== CART ===');
+console.log((await p.locator('main').innerText()).slice(0, 900));
+await p.goto('https://boutique-client-two.vercel.app/checkout', { waitUntil: 'networkidle' });
+console.log('=== CHECKOUT ===');
+console.log((await p.locator('main').innerText()).slice(0, 1200));
+await b.close();

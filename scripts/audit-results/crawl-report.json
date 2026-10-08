@@ -1,0 +1,372 @@
+{
+  "client": {
+    "pages": [
+      {
+        "url": "https://boutique-client-two.vercel.app/",
+        "label": "client-home",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/categories?_rsc=5CB68i4pnAekjehf :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=HjLtn-e-OSj4kSN3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?q=&_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/categorie-test-e2e-1791072288973?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvdtsm2-modifiee?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muve5ekm-modifiee?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvecsgi-modifiee?_rsc=tXyZJ52UQVBCVsD3 :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/",
+        "status": 200,
+        "title": "ISF NAF-CHOPOP — Achat en ligne à Niamey, paiement à la livraison",
+        "screenshot": "client-home.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/products",
+        "label": "client-products",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/search?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=6DfGuAtbYKhLuW3S :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "404 https://boutique-client-two.vercel.app/products",
+          "404 https://boutique-client-two.vercel.app/products",
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/products",
+        "status": 404,
+        "title": "ISF NAF-CHOPOP — Achat en ligne à Niamey",
+        "screenshot": "client-products.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/categories",
+        "label": "client-categories",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/connexion?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/accessoires?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/beaute?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/categorie-test-e2e-1791072288973?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvdtsm2-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvecsgi-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muve5ekm-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfcpt0-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfmdr8-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfissr-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvg4w6x-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfdwmg-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvgapug-modifiee?_rsc=b_6lnPdKfliJZfOR :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/categories",
+        "status": 200,
+        "title": "Toutes nos catégories | ISF NAF-CHOPOP",
+        "screenshot": "client-categories.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/search",
+        "label": "client-search",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/compte?_rsc=6grVij_EUBxTWnLP :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/categorie-test-e2e-1791072288973?_rsc=6grVij_EUBxTWnLP :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/categorie-test-e2e-1791072288973?_rsc=Bh0axSukl8S5DdMX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvecsgi-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muve5ekm-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvdtsm2-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfcpt0-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfmdr8-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfissr-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories/e2e-cat-muvfdwmg-modifiee?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=MnWTrh3l-09yAlSG :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/search",
+        "status": 200,
+        "title": "Rechercher un produit | ISF NAF-CHOPOP",
+        "screenshot": "client-search.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/cart",
+        "label": "client-cart",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/connexion?_rsc=XtGPxDbe_Mfh2O43 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=ct2cfGeIw1FH09KM :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=XtGPxDbe_Mfh2O43 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=XtGPxDbe_Mfh2O43 :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/cart",
+        "status": 200,
+        "title": "Mon panier | ISF NAF-CHOPOP",
+        "screenshot": "client-cart.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/checkout",
+        "label": "client-checkout",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/checkout :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=7t6lXWKhwMZi91v- :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=7t6lXWKhwMZi91v- :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=7t6lXWKhwMZi91v- :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=29lY4lYNdw43gYI2 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=7t6lXWKhwMZi91v- :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/checkout",
+        "status": 200,
+        "title": "Finaliser ma commande | ISF NAF-CHOPOP",
+        "screenshot": "client-checkout.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/connexion",
+        "label": "client-login",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/connexion :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/mot-de-passe-oublie?_rsc=HCUvTMxehU5WSUo2 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/mot-de-passe-oublie?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/inscription?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=lnhqxTEG6fctgYFZ :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/connexion",
+        "status": 200,
+        "title": "Connexion | ISF NAF-CHOPOP",
+        "screenshot": "client-login.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/inscription",
+        "label": "client-register",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/categories?_rsc=W2gb5fsw7YerK3Ix :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=Qb1e_N1kbBQgX4FA :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=Qb1e_N1kbBQgX4FA :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=p_EV9npeB5d-e6J9 :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=Qb1e_N1kbBQgX4FA :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=Qb1e_N1kbBQgX4FA :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/inscription",
+        "status": 200,
+        "title": "Créer un compte | ISF NAF-CHOPOP",
+        "screenshot": "client-register.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/orders",
+        "label": "client-orders",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "Failed to load resource: the server responded with a status of 404 ()",
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/categories?_rsc=OXEfaXsCQr9qpu4a :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=OXEfaXsCQr9qpu4a :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=6DfGuAtbYKhLuW3S :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/search?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=242tnRB5_IlegzMX :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "404 https://boutique-client-two.vercel.app/orders",
+          "404 https://boutique-client-two.vercel.app/orders",
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/orders",
+        "status": 404,
+        "title": "ISF NAF-CHOPOP — Achat en ligne à Niamey",
+        "screenshot": "client-orders.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/about",
+        "label": "client-about",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/search?_rsc=yMFZbW3py_RmPDJX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/categories?_rsc=XmkO_jJuilHtV26o :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=yMFZbW3py_RmPDJX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=yMFZbW3py_RmPDJX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=yMFZbW3py_RmPDJX :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/about",
+        "status": 200,
+        "title": "À propos | ISF NAF-CHOPOP",
+        "screenshot": "client-about.png"
+      },
+      {
+        "url": "https://boutique-client-two.vercel.app/contact",
+        "label": "client-contact",
+        "consoleErrors": [
+          "Failed to load resource: the server responded with a status of 400 ()",
+          "A bad HTTP response code (404) was received when fetching the script."
+        ],
+        "failedRequests": [
+          "https://boutique-client-two.vercel.app/categories?_rsc=Gyt-sNhexopbo4QX :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/?_rsc=mTa8tpfUvA8h8GpF :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/connexion?_rsc=mTa8tpfUvA8h8GpF :: net::ERR_ABORTED",
+          "https://boutique-client-two.vercel.app/compte?_rsc=mTa8tpfUvA8h8GpF :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [
+          "400 https://boutique-client-two.vercel.app/_next/image?url=%2Fimages%2Flogo.jpeg&w=48&q=75"
+        ],
+        "finalUrl": "https://boutique-client-two.vercel.app/contact",
+        "status": 200,
+        "title": "ISF NAF-CHOPOP — Achat en ligne à Niamey",
+        "screenshot": "client-contact.png"
+      }
+    ]
+  },
+  "admin": {
+    "loginOk": false,
+    "pages": [
+      {
+        "url": "https://boutique-admin-niger.vercel.app/admin",
+        "label": "admin-home-noauth",
+        "consoleErrors": [],
+        "failedRequests": [],
+        "badStatuses": [],
+        "finalUrl": "https://boutique-admin-niger.vercel.app/connexion?returnTo=%2Fadmin",
+        "status": 200,
+        "title": "Connexion | Administration",
+        "screenshot": "admin-home-noauth.png"
+      }
+    ]
+  },
+  "driver": {
+    "loginOk": true,
+    "links": [
+      "/driver",
+      "/driver/deliveries",
+      "/driver/history"
+    ],
+    "pages": [
+      {
+        "url": "https://livreur-nu.vercel.app/driver",
+        "label": "driver-home-noauth",
+        "consoleErrors": [],
+        "failedRequests": [
+          "https://livreur-nu.vercel.app/mot-de-passe-oublie?_rsc=WBP9MArBBq6IpMhD :: net::ERR_ABORTED"
+        ],
+        "badStatuses": [],
+        "finalUrl": "https://livreur-nu.vercel.app/connexion?returnTo=%2Fdriver",
+        "status": 200,
+        "title": "Connexion | Espace livreur",
+        "screenshot": "driver-home-noauth.png"
+      },
+      {
+        "url": "https://livreur-nu.vercel.app/driver",
+        "label": "driver-dashboard",
+        "consoleErrors": [],
+        "failedRequests": [],
+        "badStatuses": [],
+        "finalUrl": "https://livreur-nu.vercel.app/driver",
+        "status": 200,
+        "title": "Mes livraisons | Espace livreur",
+        "screenshot": "driver-dashboard.png"
+      },
+      {
+        "url": "https://livreur-nu.vercel.app/driver",
+        "label": "driver--driver",
+        "consoleErrors": [],
+        "failedRequests": [],
+        "badStatuses": [],
+        "finalUrl": "https://livreur-nu.vercel.app/driver",
+        "status": 200,
+        "title": "Mes livraisons | Espace livreur",
+        "screenshot": "driver--driver.png"
+      },
+      {
+        "url": "https://livreur-nu.vercel.app/driver/deliveries",
+        "label": "driver--driver-deliveries",
+        "consoleErrors": [
+          "WebSocket connection to 'wss://hccolumwehlzeakogglg.supabase.co/realtime/v1/websocket?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhjY29sdW13ZWhsemVha29nZ2xnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA4OTA3MDMsImV4cCI6MjEwNjQ2NjcwM30.Dck53esV_uNnNbtwiUbmsewXz02545N6tOJkPCrRv_"
+        ],
+        "failedRequests": [],
+        "badStatuses": [],
+        "finalUrl": "https://livreur-nu.vercel.app/driver/deliveries",
+        "status": 200,
+        "title": "Mes missions | Espace livreur",
+        "screenshot": "driver--driver-deliveries.png"
+      },
+      {
+        "url": "https://livreur-nu.vercel.app/driver/history",
+        "label": "driver--driver-history",
+        "consoleErrors": [],
+        "failedRequests": [],
+        "badStatuses": [],
+        "finalUrl": "https://livreur-nu.vercel.app/driver/history",
+        "status": 200,
+        "title": "Mon historique | Espace livreur",
+        "screenshot": "driver--driver-history.png"
+      }
+    ]
+  }
+}

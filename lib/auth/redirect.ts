@@ -39,7 +39,7 @@ export function homePathForRole(role: UserRole | null | undefined): string | nul
     case "customer":
       return "/compte";
     case "driver":
-      return "/livreur";
+      return "/driver";
     case "admin":
     case "order_operator":
     case "stock_manager":

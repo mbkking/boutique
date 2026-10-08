@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">ISF NAF-CHOPOP</string>
+    <string name="title_activity_main">ISF NAF-CHOPOP</string>
+    <string name="package_name">com.isfnafchopop.boutique</string>
+    <string name="custom_url_scheme">com.isfnafchopop.boutique</string>
+</resources>

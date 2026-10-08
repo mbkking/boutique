@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const ctx = await b.newContext();
+const p = await ctx.newPage();
+await p.goto('https://livreur-nu.vercel.app/connexion', { waitUntil: 'networkidle' });
+await p.locator('input[type=email]').first().fill('bassirouyahayamoubarak20@gmail.com');
+await p.locator('input[type=password]').first().fill('NstMqDHspRVBjX!7');
+await p.locator('button[type=submit]').first().click();
+await p.waitForTimeout(6000);
+const errors = [];
+p.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+await p.goto('https://livreur-nu.vercel.app/driver/deliveries', { waitUntil: 'networkidle' });
+await p.waitForTimeout(6000);
+console.log(errors.join('\n---\n'));
+await b.close();

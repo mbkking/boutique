@@ -67,4 +67,6 @@ export const AUDIT_ACTIONS = {
   DRIVER_INVITED: "DRIVER_INVITED",
   /** Extraction en masse de coordonnées clients (RM-07). */
   ORDERS_EXPORTED: "ORDERS_EXPORTED",
+  /** Suppression refusée car l'entité possède un historique ou des dépendances. */
+  DELETE_REFUSED: "DELETE_REFUSED",
 } as const;

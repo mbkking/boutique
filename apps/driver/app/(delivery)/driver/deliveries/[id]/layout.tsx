@@ -1,10 +1,18 @@
+import { guardPage } from "@/lib/auth/guard";
+import { PERMISSIONS } from "@/lib/auth/permissions";
+
 /**
- * Route de l'application `driver`, ré-exportée depuis le code partagé.
+ * Garde du détail d'une livraison côté livreur.
  *
- * Source : `(delivery)\driver\deliveries\[id]\layout.tsx` (dépôt racine).
- *
- * Aucun code métier n'est dupliqué : l'application ne fait que déclarer
- * qu'elle sert cette route, avec son propre contexte Next.
+ * La vérification du rôle s'effectue ici, sur le serveur, avant le rendu. La
+ * restriction aux livraisons qui lui sont assignées est appliquée par les
+ * policies RLS et par les server actions.
  */
-export * from "@repo/app/(delivery)/driver/deliveries/[id]/layout";
-export { default } from "@repo/app/(delivery)/driver/deliveries/[id]/layout";
+export default async function DriverDeliveryLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  await guardPage([PERMISSIONS.DELIVERY_READ_OWN, PERMISSIONS.DELIVERY_READ_ALL]);
+  return <>{children}</>;
+}

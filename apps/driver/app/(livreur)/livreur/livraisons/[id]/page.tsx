@@ -1,10 +1,12 @@
-/**
- * Route de l'application `driver`, ré-exportée depuis le code partagé.
- *
- * Source : `(livreur)\livreur\livraisons\[id]\page.tsx` (dépôt racine).
- *
- * Aucun code métier n'est dupliqué : l'application ne fait que déclarer
- * qu'elle sert cette route, avec son propre contexte Next.
- */
-export * from "@repo/app/(livreur)/livreur/livraisons/[id]/page";
-export { default } from "@repo/app/(livreur)/livreur/livraisons/[id]/page";
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
+export default async function LivreurLivraisonIdPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  redirect(`/driver/deliveries/${id}`);
+}

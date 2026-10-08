@@ -1,0 +1,13 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const ctx = await b.newContext({ storageState: 'scripts/audit-results/admin-auth.json' });
+const p = await ctx.newPage();
+await p.goto('https://boutique-admin-niger.vercel.app/admin/products', { waitUntil: 'networkidle', timeout: 60000 });
+const li = p.locator('main li', { hasText: 'E2E produit muvqimg5' }).first();
+await li.locator('button:has-text("Supprimer")').first().click();
+await p.waitForTimeout(800);
+await li.locator('button:has-text("Supprimer")').last().click();
+await p.waitForTimeout(5000);
+const alerts = await p.locator('[role=alert], [role=status]').allInnerTexts();
+console.log('ALERTS:', alerts);
+await b.close();

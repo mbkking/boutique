@@ -1,0 +1,15 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const ctx = await b.newContext();
+const p = await ctx.newPage();
+await p.goto('https://boutique-client-two.vercel.app/products/bab', { waitUntil: 'networkidle' });
+await p.locator('button:has-text("Ajouter au panier")').click();
+await p.waitForTimeout(2000);
+await p.goto('https://boutique-client-two.vercel.app/checkout', { waitUntil: 'networkidle' });
+await p.locator('input[name=full_name]').fill('QA Testeur');
+await p.locator('input[name=phone]').fill('96000001');
+await p.locator('button:has-text("Continuer")').first().click();
+await p.waitForTimeout(2500);
+console.log('=== STEP2 ===');
+console.log((await p.locator('main').innerText()).slice(0, 1200));
+await b.close();

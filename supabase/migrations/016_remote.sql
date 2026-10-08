@@ -1,0 +1,2 @@
+-- Placeholder: migration historique appliquée à distance avant la reprise du suivi local.
+-- Numéro synchronisé avec supabase_migrations.schema_migrations.

@@ -1,0 +1,14 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const ctx = await b.newContext({ storageState: 'scripts/audit-results/admin-auth.json' });
+const p = await ctx.newPage();
+await p.goto('https://boutique-admin-niger.vercel.app/admin/products', { waitUntil: 'networkidle', timeout: 60000 });
+p.on('dialog', async (d) => { console.log('DIALOG:', d.message()); await d.accept(); });
+const li = p.locator('main li', { hasText: 'E2E produit muvqimg5' }).first();
+await li.locator('button:has-text("Supprimer")').click();
+await p.waitForTimeout(4000);
+const m = (await p.locator('body').innerText()).match(/.{0,60}(supprim|erreur|succ)[^\n]{0,60}/gi);
+console.log(m ? m.slice(0, 5) : 'no msg');
+await p.goto('https://boutique-admin-niger.vercel.app/admin/products', { waitUntil: 'networkidle' });
+console.log('still listed:', (await p.locator('body').innerText()).includes('muvqimg5'));
+await b.close();

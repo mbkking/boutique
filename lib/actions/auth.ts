@@ -122,6 +122,16 @@ export async function signUpAction(
           "Un compte existe déjà avec cette adresse. Connectez-vous ou réinitialisez votre mot de passe."
         );
       }
+      if (
+        detail.includes("rate limit") ||
+        detail.includes("too many requests") ||
+        (error as { status?: number }).status === 429
+      ) {
+        logger.warn("auth: inscription bloquee par la limite e-mail", { error: error.message });
+        return failure(
+          "L'envoi des e-mails de confirmation est temporairement saturé. Réessayez dans quelques minutes."
+        );
+      }
       logger.warn("auth: inscription refusee", { error: error.message });
       return failure("La création du compte a échoué. Réessayez dans un instant.");
     }

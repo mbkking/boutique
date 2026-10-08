@@ -1,0 +1,1348 @@
+# AUDIT QA COMPLET — BOUTIQUE NIGER  je de donne tous le autorisation , tous les acces 
+
+## 1. TON RÔLE
+
+Tu dois agir simultanément comme :
+
+- Ingénieur logiciel senior Web
+- Ingénieur mobile / PWA / Capacitor
+- Ingénieur Backend
+- Ingénieur base de données PostgreSQL / Supabase
+- Ingénieur sécurité
+- Ingénieur DevOps / déploiement / hébergement
+- QA Engineer / Test Engineer
+- UX/UI Designer
+- Product Manager
+- Auditeur fonctionnel
+
+Tu dois réaliser un **audit complet, réel et rigoureux de l'application BOUTIQUE**, et non une simple revue visuelle du code.
+
+Ton objectif est de déterminer si l'application est réellement exploitable par un client, un administrateur et un livreur, de bout en bout.
+
+Tu dois tester l'application comme le ferait un véritable utilisateur, puis vérifier la cohérence technique derrière chaque action.
+
+---
+
+# 2. APPLICATION À AUDITER
+
+## Application CLIENT
+
+URL :https://boutique-client-two.vercel.app/
+
+[https://boutique-client-two.vercel.app/](https://boutique-client-two.vercel.app/)
+
+Cette interface doit être testée comme un véritable client.
+
+---
+
+## APPLICATION ADMIN
+
+URL : https://boutique-admin-niger.vercel.app/  SI ce lein ne marche pas  utilise ca :https://boutique-admin-niger.vercel.app/connexion?returnTo=%2Fadmin
+
+ou ca [https://boutique-admin-niger.vercel.app/admin](https://boutique-admin-niger.vercel.app/admin)
+
+Compte administrateur :
+
+Email :
+[admin.test@exemple.ne](mailto\:admin.test@exemple.ne)
+
+Mot de passe :
+Adm25-7f3c9a1e4b
+
+---
+
+## APPLICATION LIVREUR
+
+URL : https://livreur-nu.vercel.app/  si ca ne marche pas utilise ca :https://livreur-nu.vercel.app/connexion?returnTo=%2Fdriver
+
+ou [https://livreur-nu.vercel.app/driver](https://livreur-nu.vercel.app/driver)
+
+Compte livreur :
+
+Email :
+[bassirouyahayamoubarak20@gmail.com](mailto\:bassirouyahayamoubarak20@gmail.com)
+
+Mot de passe :
+NstMqDHspRVBjX!7
+
+---
+
+## BASE DE DONNÉES
+
+Supabase :
+
+[https://hccolumwehlzeakogglg.supabase.co](https://hccolumwehlzeakogglg.supabase.co)
+
+Les accès nécessaires à la base / au projet Supabase sont également fournis dans l'environnement de travail.
+
+Tu dois utiliser les accès disponibles uniquement dans le cadre de cet audit.
+
+---
+
+# 3. RÈGLE PRINCIPALE
+
+NE TE CONTENTE PAS DE REGARDER L'INTERFACE.
+
+Tu dois réellement :
+
+- ouvrir les pages ;
+- cliquer sur les boutons ;
+- ouvrir les menus ;
+- ouvrir les onglets ;
+- ouvrir les modales ;
+- remplir les formulaires ;
+- créer des comptes ;
+- te connecter ;
+- te déconnecter ;
+- créer des produits ;
+- modifier des produits ;
+- supprimer des produits ;
+- créer des catégories ;
+- modifier des catégories ;
+- supprimer des catégories ;
+- créer des commandes ;
+- modifier les commandes ;
+- tester le panier ;
+- tester le checkout ;
+- tester les adresses ;
+- tester les zones de livraison ;
+- tester le processus de livraison ;
+- tester les statuts ;
+- tester les actions administrateur ;
+- tester les actions livreur ;
+- vérifier les données dans Supabase ;
+- vérifier que les données supprimées sont réellement supprimées ou correctement archivées ;
+- vérifier que les données affichées correspondent réellement à la base ;
+- vérifier les erreurs réseau/API ;
+- vérifier les erreurs JavaScript ;
+- vérifier les problèmes de permissions ;
+- vérifier les problèmes de cache ;
+- vérifier les problèmes de synchronisation ;
+- vérifier les problèmes d'état React ;
+- vérifier les problèmes de validation.
+
+Tu dois considérer que **tout ce qui est cliquable doit être testé**.
+
+---
+
+# 4. OBJECTIF FINAL
+
+À la fin de l'audit, je veux savoir avec certitude :
+
+1. Ce qui fonctionne réellement.
+2. Ce qui fonctionne partiellement.
+3. Ce qui ne fonctionne pas.
+4. Pourquoi cela ne fonctionne pas.
+5. Où se situe le problème.
+6. Quelle correction est nécessaire.
+7. Quelle priorité donner à la correction.
+8. Si le problème vient du frontend.
+9. Si le problème vient du backend.
+10. Si le problème vient de Supabase.
+11. Si le problème vient des permissions/RLS.
+12. Si le problème vient du déploiement Vercel.
+13. Si le problème vient des variables d'environnement.
+14. Si le problème vient de la logique métier.
+15. Si le problème vient de l'UX/UI.
+
+---
+
+# 5. PREMIÈRE PHASE — CARTOGRAPHIE COMPLÈTE
+
+Commence par parcourir les trois applications.
+
+Ne corrige rien immédiatement.
+
+Commence par établir la cartographie complète :
+
+### CLIENT
+
+Identifie toutes les pages accessibles :
+
+- accueil
+- catalogue
+- recherche
+- catégories
+- produit
+- panier
+- checkout
+- connexion
+- inscription
+- profil
+- commandes
+- détail commande
+- adresse
+- autres pages
+- pages d'erreur
+- pages légales si présentes
+- etc.
+
+### ADMIN
+
+Identifie toutes les pages :
+
+- dashboard
+- produits
+- catégories
+- commandes
+- clients
+- utilisateurs
+- livreurs
+- zones
+- coupons
+- paramètres
+- statistiques
+- logs/audit
+- etc.
+
+### LIVREUR
+
+Identifie :
+
+- dashboard
+- commandes disponibles
+- commandes assignées
+- détails commande
+- changement de statut
+- récupération
+- livraison
+- preuve de livraison
+- historique
+- profil
+- etc.
+
+Pour chaque page, note :
+
+- URL
+- rôle nécessaire
+- objectif de la page
+- actions disponibles
+- données affichées
+- boutons
+- liens
+- formulaires
+- modales
+- onglets
+- menus.
+
+---
+
+# 6. TESTER TOUS LES BOUTONS ET LIENS
+
+Pour chaque page :
+
+## TESTER SYSTÉMATIQUEMENT
+
+- tous les boutons ;
+- tous les liens ;
+- toutes les icônes cliquables ;
+- tous les menus ;
+- tous les dropdowns ;
+- tous les onglets ;
+- toutes les modales ;
+- toutes les fenêtres ;
+- toutes les confirmations ;
+- tous les boutons retour ;
+- toutes les actions CRUD ;
+- toutes les actions de pagination ;
+- tous les filtres ;
+- toutes les recherches ;
+- toutes les actions de tri.
+
+Pour chaque élément, déterminer :
+
+### Fonctionne
+
+ou
+
+### Fonctionne partiellement
+
+ou
+
+### Ne fonctionne pas
+
+ou
+
+### Fonctionne visuellement mais pas techniquement
+
+ou
+
+### Fonctionne mais produit un résultat incohérent.
+
+---
+
+# 7. TEST DU PARCOURS CLIENT COMPLET
+
+Tu dois simuler un véritable client.
+
+## ÉTAPE 1 — Arrivée
+
+Ouvrir le site sans compte.
+
+Vérifier :
+
+- compréhension immédiate du site ;
+- clarté du catalogue ;
+- navigation ;
+- recherche ;
+- catégories ;
+- affichage des produits ;
+- prix ;
+- stock ;
+- images ;
+- informations produit ;
+- responsive ;
+- temps de chargement.
+
+---
+
+# 8. CRÉATION DE COMPTE CLIENT
+
+Créer réellement un nouveau compte.
+
+Tester :
+
+- formulaire ;
+- validation email ;
+- validation téléphone ;
+- mot de passe ;
+- confirmation mot de passe ;
+- champs obligatoires ;
+- erreurs ;
+- messages ;
+- doublons ;
+- création réelle du compte.
+
+Après inscription :
+
+### Vérifier dans Supabase :
+
+- le compte existe-t-il ?
+- le profil existe-t-il ?
+- les bonnes données sont-elles enregistrées ?
+- le rôle est-il correct ?
+- le statut est-il correct ?
+- les relations sont-elles correctes ?
+
+Ensuite :
+
+## SE DÉCONNECTER
+
+Puis :
+
+## SE RECONNECTER AVEC LE COMPTE CRÉÉ
+
+C'est un test CRITIQUE.
+
+Le problème suivant a déjà été observé :
+
+> Un compte apparaît au niveau de l'administration mais le client ne peut pas se connecter.
+
+Tu dois impérativement reproduire ce problème.
+
+Déterminer précisément :
+
+- pourquoi le compte est créé ;
+- pourquoi il apparaît côté admin ;
+- pourquoi l'authentification échoue éventuellement ;
+- si Supabase Auth et la table profile sont synchronisés ;
+- si le rôle est correctement attribué ;
+- si RLS bloque quelque chose ;
+- si une variable d'environnement manque ;
+- si le frontend utilise les bons identifiants ;
+- si la session est correctement persistée ;
+- si le middleware protège correctement les routes.
+
+---
+
+# 9. TEST DE CONNEXION CLIENT
+
+Tester :
+
+- connexion correcte ;
+- mauvais email ;
+- mauvais mot de passe ;
+- compte inexistant ;
+- compte désactivé ;
+- session expirée ;
+- déconnexion ;
+- reconnexion ;
+- refresh navigateur ;
+- accès direct à une page protégée ;
+- navigation après connexion.
+
+Vérifier également qu'un utilisateur non connecté ne peut pas accéder aux pages protégées.
+
+---
+
+# 10. TEST PRODUITS
+
+Depuis le CLIENT :
+
+Tester :
+
+- affichage ;
+- recherche ;
+- catégorie ;
+- détail ;
+- stock ;
+- prix ;
+- quantité ;
+- ajout panier ;
+- suppression panier ;
+- modification quantité ;
+- produit indisponible ;
+- produit supprimé ;
+- produit avec stock faible.
+
+Vérifier que les prix affichés correspondent aux prix réellement utilisés lors de la commande.
+
+---
+
+# 11. TEST PANIER
+
+Tester :
+
+- ajout ;
+- suppression ;
+- modification quantité ;
+- quantité 0 ;
+- quantité négative ;
+- quantité supérieure au stock ;
+- plusieurs produits ;
+- refresh ;
+- fermeture/réouverture navigateur ;
+- connexion/déconnexion ;
+- recalcul total.
+
+Vérifier :
+
+- sous-total ;
+- livraison ;
+- éventuelle réduction ;
+- total final.
+
+Les calculs doivent être vérifiés mathématiquement.
+
+---
+
+# 12. TEST CHECKOUT
+
+Créer une vraie commande de test.
+
+Tester :
+
+- informations client ;
+- téléphone ;
+- adresse ;
+- ville ;
+- quartier ;
+- zone de livraison ;
+- choix livraison ;
+- récapitulatif ;
+- total ;
+- validation ;
+- double clic ;
+- refresh pendant validation ;
+- erreur réseau ;
+- commande répétée.
+
+Le paiement actuel est :
+
+## PAIEMENT À LA LIVRAISON
+
+Vérifier que l'application ne laisse pas croire qu'un paiement en ligne est disponible si ce n'est pas le cas.
+
+---
+
+# 13. TEST COMMANDE DE BOUT EN BOUT
+
+Créer une commande.
+
+Puis suivre son cycle complet :
+
+CLIENT
+↓
+COMMANDE CRÉÉE
+↓
+ADMIN
+↓
+TRAITEMENT
+↓
+ASSIGNATION LIVREUR
+↓
+LIVREUR
+↓
+PRISE EN CHARGE
+↓
+LIVRAISON
+↓
+CONFIRMATION
+↓
+CLIENT
+
+Vérifier chaque transition.
+
+Pour chaque statut :
+
+- qui peut le modifier ?
+- depuis quelle interface ?
+- quelle donnée est enregistrée ?
+- quelle date est enregistrée ?
+- quel utilisateur est enregistré ?
+- quel événement est créé ?
+- que voit le client ?
+- que voit l'admin ?
+- que voit le livreur ?
+
+---
+
+# 14. TEST ADMIN — PRODUITS
+
+Connecte-toi à l'administration.
+
+Créer un produit de test.
+
+Vérifier :
+
+- création DB ;
+- affichage admin ;
+- affichage client ;
+- prix ;
+- stock ;
+- catégorie ;
+- image ;
+- statut ;
+- slug ;
+- date.
+
+Modifier le produit.
+
+Puis vérifier immédiatement côté client.
+
+Ensuite supprimer le produit.
+
+## TEST CRITIQUE DE SUPPRESSION
+
+Après suppression :
+
+1. vérifier l'interface admin ;
+2. actualiser la page ;
+3. vérifier l'application client ;
+4. vérifier directement Supabase ;
+5. vérifier les relations avec les autres tables ;
+6. vérifier les éventuels caches ;
+7. vérifier les API ;
+8. vérifier le comportement après reconnexion.
+
+Un produit supprimé ne doit pas continuer à être présenté comme actif sans raison métier.
+
+Si le système utilise une suppression logique/soft delete, ce n'est pas forcément un bug.
+
+Dans ce cas, déterminer :
+
+- quel champ indique la suppression ;
+- pourquoi la donnée reste en DB ;
+- si c'est volontaire ;
+- si le frontend filtre correctement les éléments supprimés.
+
+Ne conclus jamais automatiquement que "présent dans DB = bug".
+
+---
+
+# 15. TEST CATÉGORIES
+
+Faire exactement le même test :
+
+Créer catégorie.
+
+Modifier catégorie.
+
+Supprimer catégorie.
+
+Vérifier :
+
+- admin ;
+- client ;
+- DB ;
+- produits associés ;
+- filtres ;
+- cache ;
+- API ;
+- relations.
+
+Tester notamment :
+
+### Que se passe-t-il lorsqu'on supprime une catégorie contenant des produits ?
+
+Déterminer si le comportement est :
+
+- suppression interdite ;
+- produits déplacés ;
+- catégorie désactivée ;
+- suppression en cascade ;
+- autre.
+
+Le comportement doit être cohérent et sécurisé.
+
+---
+
+# 16. TEST UTILISATEURS
+
+Depuis l'administration :
+
+Tester :
+
+- liste utilisateurs ;
+- recherche ;
+- filtres ;
+- détail ;
+- activation ;
+- désactivation ;
+- modification ;
+- rôles ;
+- permissions.
+
+Vérifier qu'un administrateur ne peut pas effectuer des actions incohérentes.
+
+Tester également les comptes :
+
+- client ;
+- admin ;
+- livreur.
+
+Vérifier la séparation des rôles.
+
+---
+
+# 17. TEST LIVREUR
+
+Se connecter avec le compte livreur fourni.
+
+Tester toutes les fonctionnalités.
+
+Notamment :
+
+- commandes disponibles ;
+- commandes assignées ;
+- détail ;
+- changement de statut ;
+- prise en charge ;
+- livraison ;
+- preuve de livraison ;
+- historique ;
+- profil ;
+- déconnexion.
+
+Vérifier qu'un livreur :
+
+- ne voit pas les données administratives ;
+- ne peut pas modifier n'importe quelle commande ;
+- ne peut pas accéder aux données sensibles ;
+- ne peut pas modifier le prix ;
+- ne peut pas modifier arbitrairement le client ;
+- ne peut pas s'attribuer des commandes qui ne lui sont pas destinées sans autorisation.
+
+---
+
+# 18. TEST PERMISSIONS / RLS / SÉCURITÉ
+
+C'est une partie CRITIQUE.
+
+Vérifier les permissions côté Supabase.
+
+Ne jamais faire confiance uniquement au frontend.
+
+Tester notamment :
+
+CLIENT → données d'un autre client.
+
+CLIENT → commandes d'un autre client.
+
+CLIENT → données admin.
+
+CLIENT → données livreur.
+
+LIVREUR → commandes d'un autre livreur.
+
+LIVREUR → données administratives.
+
+ADMIN → opérations autorisées.
+
+Vérifier les politiques RLS.
+
+Identifier toute table sensible qui serait accessible sans contrôle approprié.
+
+---
+
+# 19. TEST BASE DE DONNÉES
+
+Vérifier les principales tables.
+
+Pour chaque entité importante :
+
+- structure ;
+- relations ;
+- clés étrangères ;
+- contraintes ;
+- valeurs NULL ;
+- valeurs par défaut ;
+- unicité ;
+- index ;
+- suppression ;
+- cascade ;
+- cohérence.
+
+Chercher notamment :
+
+- données orphelines ;
+- doublons ;
+- références cassées ;
+- commandes sans client ;
+- commandes sans lignes ;
+- produits sans catégorie lorsque cela est interdit ;
+- catégories inexistantes ;
+- utilisateurs sans profil ;
+- profils sans utilisateur Auth ;
+- commandes avec montant incohérent.
+
+---
+
+# 20. VÉRIFICATION DES CALCULS
+
+Vérifier tous les calculs métier.
+
+Exemples :
+
+PRIX × QUANTITÉ
+
+SOUS-TOTAL
+
+RÉDUCTION
+
+FRAIS DE LIVRAISON
+
+TOTAL
+
+STOCK
+
+QUANTITÉ COMMANDÉE
+
+STOCK RESTANT
+
+COUPON
+
+etc.
+
+Ne fais pas confiance uniquement à l'affichage frontend.
+
+Vérifie les valeurs réellement enregistrées en DB.
+
+---
+
+# 21. TEST DES CAS LIMITES
+
+Tester volontairement les cas suivants :
+
+- quantité = 0 ;
+- quantité négative ;
+- quantité énorme ;
+- stock insuffisant ;
+- produit supprimé pendant le panier ;
+- catégorie supprimée ;
+- double clic ;
+- double commande ;
+- refresh ;
+- retour navigateur ;
+- session expirée ;
+- connexion lente ;
+- erreur réseau ;
+- champ vide ;
+- email invalide ;
+- téléphone invalide ;
+- caractères spéciaux ;
+- très longue description ;
+- image invalide ;
+- image très lourde ;
+- produit sans image ;
+- produit sans stock ;
+- prix nul ;
+- prix négatif ;
+- coupon invalide ;
+- coupon expiré ;
+- coupon utilisé plusieurs fois ;
+- adresse inexistante.
+
+---
+
+# 22. TEST UX / UI
+
+Tu dois également te comporter comme un utilisateur qui ne connaît absolument pas l'application.
+
+Pour chaque page, pose-toi les questions suivantes :
+
+### Est-ce que je comprends immédiatement quoi faire ?
+
+### Est-ce que je sais ce qui vient ensuite ?
+
+### Est-ce que les boutons sont suffisamment explicites ?
+
+### Est-ce que les messages d'erreur expliquent réellement le problème ?
+
+### Est-ce que l'utilisateur sait comment résoudre le problème ?
+
+### Est-ce que les confirmations sont suffisamment claires ?
+
+### Est-ce qu'une action destructive demande confirmation ?
+
+### Est-ce que je risque de cliquer accidentellement ?
+
+### Est-ce que les informations importantes sont visibles ?
+
+### Est-ce que le site est utilisable sur mobile ?
+
+### Est-ce que les textes sont lisibles ?
+
+### Est-ce que les états loading sont corrects ?
+
+### Est-ce que les états vides sont correctement expliqués ?
+
+### Est-ce que les erreurs réseau sont compréhensibles ?
+
+### Est-ce que l'utilisateur sait que sa commande a été créée ?
+
+### Est-ce qu'il sait où retrouver sa commande ?
+
+---
+
+# 23. TEST RESPONSIVE
+
+Tester au minimum :
+
+- desktop ;
+- tablette ;
+- mobile.
+
+Vérifier :
+
+- menus ;
+- tableaux ;
+- formulaires ;
+- cartes produit ;
+- panier ;
+- checkout ;
+- dashboard admin ;
+- dashboard livreur.
+
+Identifier :
+
+- débordements ;
+- textes coupés ;
+- boutons trop petits ;
+- éléments impossibles à toucher ;
+- tableaux inutilisables ;
+- modales trop grandes ;
+- navigation cassée.
+
+---
+
+# 24. TEST PERFORMANCE
+
+Identifier :
+
+- pages lentes ;
+- images trop lourdes ;
+- appels API inutiles ;
+- requêtes répétées ;
+- chargements inutiles ;
+- problèmes de cache ;
+- waterfalls réseau ;
+- composants qui se re-rendent inutilement.
+
+Vérifier également si certaines pages font des requêtes alors qu'elles ne devraient pas.
+
+---
+
+# 25. TEST VERCEL / PRODUCTION
+
+Vérifier les trois applications en production.
+
+Chercher :
+
+- erreurs runtime ;
+- erreurs console ;
+- erreurs réseau ;
+- 404 ;
+- 500 ;
+- problèmes de variables d'environnement ;
+- problèmes CORS ;
+- problèmes de cookies ;
+- problèmes de domaine ;
+- problèmes de redirection ;
+- problèmes de middleware ;
+- problèmes de build ;
+- différences développement / production.
+
+---
+
+# 26. TEST PERSISTANCE
+
+Pour chaque opération importante :
+
+1. effectuer l'action ;
+2. refresh ;
+3. fermer la page ;
+4. rouvrir ;
+5. se reconnecter ;
+6. vérifier les données.
+
+L'application ne doit pas simplement donner l'impression que l'action fonctionne.
+
+La donnée doit réellement persister.
+
+---
+
+# 27. TEST COHÉRENCE FRONTEND / BACKEND / DB
+
+Pour chaque opération importante :
+
+FRONTEND
+↓
+API / SERVER ACTION
+↓
+BACKEND
+↓
+SUPABASE
+↓
+RETOUR FRONTEND
+
+Tu dois vérifier toute la chaîne.
+
+Si l'interface dit :
+
+"Produit supprimé"
+
+mais que le backend n'a rien supprimé :
+
+BUG.
+
+Si la DB contient le produit mais qu'il est marqué `deleted_at` :
+
+potentiellement NORMAL.
+
+Si la DB est correcte mais le frontend affiche encore l'ancien produit :
+
+BUG DE CACHE / REVALIDATION / ÉTAT.
+
+Tu dois déterminer précisément la cause.
+
+---
+
+# 28. NE PAS CORRIGER AVEUGLEMENT
+
+IMPORTANT :
+
+Pendant la première partie de l'audit, ne modifie pas le projet au hasard.
+
+Pour chaque problème :
+
+1. reproduire ;
+2. identifier ;
+3. déterminer la cause ;
+4. localiser le fichier concerné ;
+5. localiser la fonction concernée ;
+6. déterminer la correction ;
+7. déterminer les éventuels effets secondaires.
+
+Ne fais jamais :
+
+"ça ne marche pas → je change le code".
+
+Je veux une analyse d'ingénieur.
+
+---
+
+# 29. SI TU AS ACCÈS AU CODE SOURCE
+
+Analyse également :
+
+- architecture ;
+- composants ;
+- services ;
+- Server Actions ;
+- API ;
+- middleware ;
+- authentification ;
+- autorisation ;
+- Supabase ;
+- RLS ;
+- migrations ;
+- types ;
+- validations ;
+- gestion d'erreurs ;
+- cache ;
+- revalidation ;
+- gestion des états ;
+- tests ;
+- variables d'environnement.
+
+Cherche les incohérences entre :
+
+CODE
+
+DATABASE
+
+DEPLOYMENT
+
+UI
+
+---
+
+# 30. BUGS DÉJÀ SIGNALÉS À REPRODUIRE
+
+Tu dois impérativement investiguer ces problèmes :
+
+### BUG 1 — Création de compte
+
+Un utilisateur crée un compte.
+
+Le compte apparaît côté admin.
+
+Mais le client ne peut pas se connecter.
+
+Déterminer la cause exacte.
+
+---
+
+### BUG 2 — Suppression produit
+
+L'admin supprime un produit.
+
+Le produit semble supprimé dans l'interface.
+
+Mais il reste dans la DB et/ou continue à apparaître.
+
+Déterminer si c'est :
+
+- soft delete volontaire ;
+- suppression incomplète ;
+- cache ;
+- revalidation ;
+- problème RLS ;
+- erreur Server Action ;
+- erreur API ;
+- erreur transactionnelle ;
+- autre.
+
+---
+
+### BUG 3 — Suppression catégorie
+
+Même problème pour les catégories.
+
+Tester également le cas où des produits utilisent cette catégorie.
+
+---
+
+# 31. RAPPORT FINAL OBLIGATOIRE
+
+À la fin, produis un rapport professionnel.
+
+## A — RÉSUMÉ EXÉCUTIF
+
+Donne une note globale :
+
+### Fonctionnalité : /10
+
+### Fiabilité : /10
+
+### UX : /10
+
+### UI : /10
+
+### Sécurité : /10
+
+### Base de données : /10
+
+### Performance : /10
+
+### Production / déploiement : /10
+
+### Maintenabilité : /10
+
+### Note globale : /10
+
+Puis donne ton verdict :
+
+- PRÊT POUR PRODUCTION
+- PRÊT AVEC CORRECTIONS
+- NON PRÊT POUR PRODUCTION
+
+---
+
+# 32. TABLEAU DES BUGS
+
+Pour chaque problème, utiliser ce format :
+
+| ID | Priorité | Module | Problème | Reproduction | Cause probable | Cause confirmée | Correction |
+| -- | -------- | ------ | -------- | ------------ | -------------- | --------------- | ---------- |
+
+Priorités :
+
+### P0 — BLOQUANT
+
+Impossible d'utiliser une fonctionnalité critique.
+
+### P1 — CRITIQUE
+
+Impact majeur sur l'utilisation ou les données.
+
+### P2 — IMPORTANT
+
+Fonctionnalité dégradée mais contournable.
+
+### P3 — MINEUR
+
+Problème UX/UI ou amélioration.
+
+---
+
+# 33. TABLEAU DES TESTS
+
+Créer également :
+
+| Test | Rôle | Action | Résultat attendu | Résultat réel | Statut |
+| ---- | ---- | ------ | ---------------- | ------------- | ------ |
+
+Statuts :
+
+- PASS
+- FAIL
+- PARTIAL
+- BLOCKED
+
+Ne mets jamais PASS si tu n'as pas réellement testé.
+
+---
+
+# 34. MATRICE DES PARCOURS
+
+Créer :
+
+### PARCOURS CLIENT
+
+Inscription
+→ Connexion
+→ Catalogue
+→ Produit
+→ Panier
+→ Checkout
+→ Commande
+→ Suivi
+→ Livraison
+→ Historique
+
+Indiquer pour chaque étape :
+
+PASS / FAIL / PARTIAL.
+
+---
+
+### PARCOURS ADMIN
+
+Connexion
+→ Dashboard
+→ Produits
+→ Catégories
+→ Clients
+→ Commandes
+→ Affectation livreur
+→ Zones
+→ Coupons
+→ Paramètres
+→ Audit
+
+---
+
+### PARCOURS LIVREUR
+
+Connexion
+→ Commandes
+→ Affectation
+→ Prise en charge
+→ Livraison
+→ Preuve
+→ Finalisation
+→ Historique
+
+---
+
+# 35. PLAN DE CORRECTION
+
+À la fin, produire un plan de correction dans cet ordre :
+
+## PHASE 1 — BLOQUANTS
+
+Tous les problèmes empêchant l'utilisation normale.
+
+## PHASE 2 — DONNÉES / DB / SÉCURITÉ
+
+Tout ce qui peut provoquer perte, incohérence ou fuite de données.
+
+## PHASE 3 — LOGIQUE MÉTIER
+
+Commandes, stock, prix, livraison, rôles, statuts.
+
+## PHASE 4 — UX/UI
+
+Navigation, messages, formulaires, responsive.
+
+## PHASE 5 — PERFORMANCE
+
+Cache, images, requêtes, chargement.
+
+## PHASE 6 — FINITIONS
+
+Polissage et améliorations.
+
+---
+
+# 36. IMPORTANT — NE PAS SE LIMITER AUX BUGS VISIBLES
+
+Je veux que tu cherches également les problèmes que l'utilisateur ne voit pas immédiatement.
+
+Exemples :
+
+- données orphelines ;
+- permissions incorrectes ;
+- RLS insuffisant ;
+- actions non atomiques ;
+- race conditions ;
+- double soumission ;
+- incohérences de stock ;
+- prix manipulables côté client ;
+- statuts manipulables côté client ;
+- commandes accessibles par mauvais utilisateur ;
+- données sensibles exposées ;
+- secrets dans le frontend ;
+- mauvaises variables Vercel ;
+- cache obsolète ;
+- sessions mal gérées ;
+- erreurs silencieuses ;
+- absence de rollback ;
+- suppression incorrecte ;
+- transactions incomplètes.
+
+---
+
+# 37. RÈGLE ABSOLUE SUR LES CONCLUSIONS
+
+Ne suppose jamais.
+
+Si tu n'as pas pu vérifier quelque chose, écris :
+
+> NON VÉRIFIÉ
+
+Si quelque chose est bloqué par un accès ou un outil, écris :
+
+> BLOCKED — raison précise
+
+Si tu soupçonnes une cause mais que tu ne peux pas la confirmer :
+
+> CAUSE PROBABLE — non confirmée
+
+Si tu confirmes la cause :
+
+> CAUSE CONFIRMÉE
+
+Je veux une séparation stricte entre :
+
+FAIT OBSERVÉ
+
+HYPOTHÈSE
+
+CAUSE CONFIRMÉE
+
+---
+
+# 38. OBJECTIF FINAL
+
+À la fin de cet audit, je dois pouvoir prendre ton rapport et le donner à un développeur pour qu'il puisse corriger l'intégralité des problèmes sans devoir refaire lui-même l'audit.
+
+Pour chaque bug important, donne donc :
+
+- où il se produit ;
+- comment le reproduire ;
+- ce qui devrait se produire ;
+- ce qui se produit actuellement ;
+- pourquoi ;
+- fichier concerné si disponible ;
+- fonction concernée si disponible ;
+- table DB concernée si disponible ;
+- correction recommandée ;
+- risque de régression ;
+- test à ajouter pour éviter que le bug revienne.
+
+---
+
+# 39. APRÈS L'AUDIT
+
+NE MODIFIE PAS LE CODE immédiatement.
+
+Commence par me fournir le rapport complet.
+
+Ensuite seulement, si je te donne l'autorisation de corriger, nous appliquerons les corrections une par une, en commençant par les P0 puis P1.
+
+Après chaque correction importante :
+
+1. reproduire le bug ;
+2. appliquer la correction ;
+3. retester ;
+4. vérifier la DB ;
+5. vérifier les autres rôles ;
+6. vérifier qu'aucune régression n'a été introduite.
+
+L'objectif final est une application :
+
+**stable + cohérente + sécurisée + facile à utiliser + maintenable + réellement opérationnelle en production.**
+
+Ne cherche pas simplement à me dire que l'application est "bonne".
+
+Cherche activement les problèmes.
+
+Sois critique.
+
+Sois rigoureux.
+
+Si quelque chose est mal conçu, dis-le clairement.
+
+Si quelque chose fonctionne bien, confirme-le également avec un test réel.
+
+Je veux un véritable **audit QA / technique / UX / DB / production de niveau professionnel**, de A à Z.
+
+
+
+
+
+
+lien liveur:https://livreur-nu.vercel.app/driver
+compte livreur :
+email:bassirouyahayamoubarak20@gmail.com
+mot de passe :NstMqDHspRVBjX!7
+
+
+
+lien admin:https://boutique-admin-niger.vercel.app/admin
+compte admin:
+email:admin.test@exemple.ne
+mot de passe :Adm25-7f3c9a1e4b
+
+
+
+lien client :https://boutique-client-two.vercel.app/
+
+lien db :https://hccolumwehlzeakogglg.supabase.co
+
+
+
+
