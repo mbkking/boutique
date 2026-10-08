@@ -136,8 +136,7 @@ export async function signUpAction(
       return failure("La création du compte a échoué. Réessayez dans un instant.");
     }
 
-    // Confirmation e-mail exigée par le projet : aucun jeton, le visiteur
-    // doit cliquer le lien reçu avant de se connecter.
+    // Confirmation e-mail désactivée : session retournée immédiatement.
     if (!data.session) {
       return success({ signedIn: false });
     }
