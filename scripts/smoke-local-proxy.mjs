@@ -36,11 +36,15 @@ await p.waitForTimeout(1000);
 ok("/livreur anonyme redirigé", p.url().includes("/connexion") && p.url().includes("returnTo"), p.url());
 
 // 6. Connexion cliente
-await p.goto(base + "/connexion", { waitUntil: "domcontentloaded" });
+// Attendre l'hydration (réseau) avant de remplir : un click précoce
+// soumet le formulaire en GET natif et échoue à tort.
+await p.goto(base + "/connexion", { waitUntil: "networkidle", timeout: 45000 });
+await p.locator("input[type=email]").first().waitFor({ state: "visible", timeout: 15000 });
+await p.waitForTimeout(1000);
 await p.locator("input[type=email]").first().fill("qa.prod.1791481349445@exemple.ne");
 await p.locator("input[type=password]").first().fill("Test12345");
 await p.locator("button[type=submit]").first().click();
-await p.waitForTimeout(5000);
+await p.waitForTimeout(15000);
 ok("Connexion cliente", p.url().includes("/compte"), p.url());
 
 // 7. /admin en cliente -> refus
