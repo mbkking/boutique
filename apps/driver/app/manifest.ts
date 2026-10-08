@@ -1,10 +1,31 @@
+import type { MetadataRoute } from "next";
+
 /**
- * Route de l'application `driver`, ré-exportée depuis le code partagé.
+ * Manifest de l'application livreur.
  *
- * Source : `manifest.ts` (dépôt racine).
- *
- * Aucun code métier n'est dupliqué : l'application ne fait que déclarer
- * qu'elle sert cette route, avec son propre contexte Next.
+ * Volontairement distinct du manifest boutique : cette application n'a pas de
+ * page `/` (les routes démarrent à `/driver`), un `start_url` de `/` y
+ * afficherait une 404 une fois l'app installée.
  */
-export * from "@repo/app/manifest";
-export { default } from "@repo/app/manifest";
+export default function manifest(): MetadataRoute.Manifest {
+  return {
+    id: "/driver",
+    name: "Espace livreur — ISF NAF-CHOPOP",
+    short_name: "Livreur",
+    description:
+      "Espace livreur ISF NAF-CHOPOP : livraisons, statuts et suivi en temps réel.",
+    lang: "fr",
+    dir: "ltr",
+    start_url: "/driver",
+    scope: "/",
+    display: "standalone",
+    background_color: "#ffffff",
+    theme_color: "#1e2a2d",
+    categories: ["business", "productivity"],
+    icons: [
+      { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+    ],
+  };
+}

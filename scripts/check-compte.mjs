@@ -1,0 +1,12 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch();
+const p = await b.newPage();
+await p.goto('https://boutique-client-two.vercel.app/connexion', { waitUntil: 'networkidle' });
+await p.locator('input[type=email]').first().fill('bassirouyahayamoubarak2@gmail.com');
+await p.locator('input[type=password]').first().fill('Adm25-7f3c9a1e4b');
+await p.locator('button[type=submit]').first().click();
+await p.waitForTimeout(6000);
+console.log('URL:', p.url());
+await p.goto('https://boutique-client-two.vercel.app/compte', { waitUntil: 'networkidle' });
+console.log((await p.locator('body').innerText()).slice(0, 400));
+await b.close();

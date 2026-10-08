@@ -36,6 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
       "Commandez en ligne à Niamey : meubles, vêtements, chaussures, parfums et accessoires. Paiement à la livraison, livraison dans les principaux quartiers.",
     applicationName: siteName,
     formatDetection: { telephone: true },
+    appleWebApp: {
+      capable: true,
+      title: siteName,
+      statusBarStyle: "default",
+    },
   };
 }
 

@@ -16,6 +16,14 @@ export const metadata: Metadata = {
     default: "Espace livreur",
     template: "%s | Espace livreur",
   },
+  description:
+    "Espace livreur ISF NAF-CHOPOP : livraisons, statuts et suivi en temps réel.",
+  applicationName: "Espace livreur ISF NAF-CHOPOP",
+  appleWebApp: {
+    capable: true,
+    title: "Espace livreur",
+    statusBarStyle: "default",
+  },
   robots: { index: false, follow: false },
 };
 

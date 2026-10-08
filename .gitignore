@@ -11,3 +11,6 @@
 .env.test
 .vercel
 .env*
+
+# Sessions de test ne doivent jamais être versionnées
+scripts/audit-results/admin-auth.json
