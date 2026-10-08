@@ -43,12 +43,39 @@ export async function GET(request: NextRequest) {
     }
   );
 
-  const { error } = await supabase.auth.exchangeCodeForSession(code);
+  const { error, data } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
     const fallback = new URL("/connexion", url.origin);
     fallback.searchParams.set("erreur", "lien-expire");
     return NextResponse.redirect(fallback);
+  }
+
+  // Première connexion (ex. OAuth) : créer la fiche client manquante.
+  try {
+    const { createAdminClient } = await import("@/lib/supabase/server");
+    const admin = await createAdminClient();
+    const user = data?.user;
+    if (user) {
+      const { data: profile } = await admin
+        .from("profiles")
+        .select("id, full_name, phone")
+        .eq("id", user.id)
+        .maybeSingle();
+      if (profile) {
+        const { data: existing } = await admin.from("customers").select("id").eq("profile_id", profile.id).limit(1);
+        if (!existing || existing.length === 0) {
+          const { data: byPhone } = await admin.from("customers").select("id").eq("phone", profile.phone).limit(1);
+          if (byPhone && byPhone.length > 0) {
+            await admin.from("customers").update({ profile_id: profile.id }).eq("id", byPhone[0].id);
+          } else {
+            await admin.from("customers").insert({ profile_id: profile.id, full_name: profile.full_name, phone: profile.phone });
+          }
+        }
+      }
+    }
+  } catch {
+    // La fiche client est décorrélée : un prochain accès / compte la rétablira.
   }
 
   return response;

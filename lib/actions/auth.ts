@@ -141,6 +141,32 @@ export async function signUpAction(
       return success({ signedIn: false });
     }
 
+    // Fiche client liée au profil : sans elle, l'espace compte reste vide.
+    try {
+      const { createAdminClient } = await import("@/lib/supabase/server");
+      const admin = await createAdminClient();
+      const profile = await admin
+        .from("profiles")
+        .select("id, full_name, phone")
+        .eq("id", data.user?.id ?? "")
+        .maybeSingle();
+      if (profile.data) {
+        const byProfile = await admin.from("customers").select("id").eq("profile_id", profile.data.id).limit(1);
+        if (byProfile.data && byProfile.data.length === 0) {
+          const byPhone = await admin.from("customers").select("id").eq("phone", profile.data.phone).limit(1);
+          if (byPhone.data && byPhone.data.length > 0) {
+            await admin.from("customers").update({ profile_id: profile.data.id }).eq("id", byPhone.data[0].id);
+          } else {
+            await admin.from("customers").insert({ profile_id: profile.data.id, full_name: profile.data.full_name, phone: profile.data.phone });
+          }
+        }
+      }
+    } catch (e) {
+      logger.warn("auth: fiche client non créée à l'inscription", {
+        error: e instanceof Error ? e.message : String(e),
+      });
+    }
+
     revalidatePath("/", "layout");
     return success({ signedIn: true });
   } catch {
