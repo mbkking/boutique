@@ -9,3 +9,5 @@
 **/*.tsbuildinfo
 .env.local
 .env.test
+.vercel
+.env*
