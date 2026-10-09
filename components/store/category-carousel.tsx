@@ -1,6 +1,3 @@
-"use client";
-
-import { useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Package } from "lucide-react";
@@ -9,12 +6,12 @@ import { Package } from "lucide-react";
  * Catégories de la page d'accueil.
  *
  * Sur mobile : une seule rangée horizontale scrollable avec accrochage
- * (scroll-snap) et défilement automatique carte par carte.
+ * (scroll-snap), sans défilement automatique (retiré : l'utilisateur garde le
+ * contrôle du geste).
  *
  * À partir de `sm` : la grille existante est conservée à l'identique.
  *
- * Le composant est client uniquement pour le défilement et l'autoplay ; les
- * données proviennent de la page serveur, rien n'est rechargé.
+ * Les données proviennent de la page serveur, rien n'est rechargé.
  */
 
 export interface CategoryCarouselItem {
@@ -26,119 +23,17 @@ export interface CategoryCarouselItem {
   children: { id: string }[];
 }
 
-/** Intervalle entre deux cartes en autoplay (ms). */
-const AUTOPLAY_DELAY = 3500;
-
-/** Après une interaction manuelle, l'autoplay reprend après ce délai (ms). */
-const AUTOPLAY_RESUME_DELAY = 12000;
-
 export function CategoryCarousel({
   categories,
 }: {
   categories: CategoryCarouselItem[];
 }) {
-  const trackRef = useRef<HTMLUListElement | null>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const resumeRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const indexRef = useRef(0);
-
   const count = categories.length;
-
-  const cardAt = useCallback(
-    (position: number) => trackRef.current?.children.item(position) as HTMLElement | null,
-    []
-  );
-
-  const scrollToIndex = useCallback(
-    (position: number, smooth: boolean) => {
-      const card = cardAt(position);
-      if (!card) return;
-
-      card.scrollIntoView({
-        behavior: smooth ? "smooth" : "auto",
-        block: "nearest",
-        inline: "start",
-      });
-    },
-    [cardAt]
-  );
-
-  /**
-   * Synchronise l'index courant avec la position réelle du défilement, pour
-   * que l'autoplay reprenne toujours à la bonne place après un swipe manuel.
-   */
-  const handleScroll = useCallback(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const first = track.children.item(0) as HTMLElement | null;
-    if (!first) return;
-
-    const travelled = track.scrollLeft - first.offsetLeft;
-    const nearest = Math.round(travelled / (first.offsetWidth || 1));
-    const clamped = Math.min(Math.max(nearest, 0), Math.max(count - 1, 0));
-    indexRef.current = clamped;
-  }, [count]);
-
-  /** L'utilisateur interagit : on suspend l'autoplay puis on le reprend. */
-  const pauseAutoplay = useCallback(() => {
-    if (resumeRef.current) clearTimeout(resumeRef.current);
-    resumeRef.current = setTimeout(() => {
-      resumeRef.current = null;
-    }, AUTOPLAY_RESUME_DELAY);
-  }, []);
-
-  useEffect(() => {
-    if (count <= 1) return;
-
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return;
-
-    const tick = () => {
-      // L'autoplay reste suspendu après un geste de l'utilisateur.
-      if (resumeRef.current) return;
-
-      // Le carrousel n'est visible que sur mobile ; on ne pilote donc le
-      // défilement que s'il est réellement en mode horizontal.
-      const track = trackRef.current;
-      if (!track || track.scrollWidth <= track.clientWidth) {
-        timerRef.current = setTimeout(tick, AUTOPLAY_DELAY);
-        return;
-      }
-
-      const next = indexRef.current + 1 >= count ? 0 : indexRef.current + 1;
-      indexRef.current = next;
-      scrollToIndex(next, true);
-
-      timerRef.current = setTimeout(tick, AUTOPLAY_DELAY);
-    };
-
-    timerRef.current = setTimeout(tick, AUTOPLAY_DELAY);
-
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = null;
-    };
-  }, [count, scrollToIndex]);
-
-  useEffect(
-    () => () => {
-      if (resumeRef.current) clearTimeout(resumeRef.current);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    },
-    []
-  );
 
   if (count === 0) return null;
 
   return (
     <ul
-      ref={trackRef}
-      onScroll={handleScroll}
-      onTouchStart={pauseAutoplay}
-      onMouseDown={pauseAutoplay}
-      onFocusCapture={pauseAutoplay}
-      onKeyDown={pauseAutoplay}
       aria-label="Catégories, faites défiler horizontalement"
       className={[
         "mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain",

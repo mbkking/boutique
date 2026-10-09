@@ -3,7 +3,8 @@
  *
  * Contrôle le comportement réel sur plusieurs largeurs : une seule rangée
  * horizontale sur mobile, accrochage, scrollbars masquées, absence de
- * débordement de page, autoplay, et grille inchangée sur desktop.
+ * débordement de page, et grille inchangée sur desktop. L'autoplay a été
+ * retiré : aucun défilement automatique n'est attendu.
  *
  * Usage : node scripts/probe-category-carousel.mjs
  */
@@ -100,7 +101,7 @@ for (const viewport of VIEWPORTS) {
   if (errors.length > 0) console.log(`  erreurs           : ${errors.slice(0, 3).join(" | ")}`);
 
   if (!isDesktop) {
-    // Autoplay : la position doit avancer d'une carte après ~4 s.
+    // L'autoplay est retiré : la position ne doit pas bouger seule.
     const before = await page.evaluate(
       () => document.querySelector('[aria-label^="Catégories"]').scrollLeft
     );
@@ -108,20 +109,19 @@ for (const viewport of VIEWPORTS) {
     const after = await page.evaluate(
       () => document.querySelector('[aria-label^="Catégories"]').scrollLeft
     );
-    console.log(`  autoplay scrollLeft : ${Math.round(before)} -> ${Math.round(after)} ${after > before ? "(avance)" : "(ne bouge pas)"}`);
+    const moved = Math.abs(after - before);
+    console.log(`  autoplay scrollLeft : ${Math.round(before)} -> ${Math.round(after)} (déplacement ${Math.round(moved)}px ${moved <= 5 ? "OK, aucun autoplay" : "PROBLÈME"})`);
 
-    // Retour au début après la dernière carte.
+    // Le défilement manuel reste opérationnel.
     if (report.cards > 1) {
-      const wrapped = await page.evaluate(async (cardCount) => {
+      const scrolled = await page.evaluate(async () => {
         const track = document.querySelector('[aria-label^="Catégories"]');
-        for (let index = 0; index < cardCount + 1; index += 1) {
-          const card = track.children.item(index % cardCount);
-          card.scrollIntoView({ behavior: "auto", block: "nearest", inline: "start" });
-          await new Promise((resolve) => setTimeout(resolve, 60));
-        }
+        track.scrollLeft = 240;
+        track.dispatchEvent(new Event("scroll", { bubbles: true }));
+        await new Promise((resolve) => setTimeout(resolve, 120));
         return Math.round(track.scrollLeft);
-      }, report.cards);
-      console.log(`  après boucle complète : scrollLeft = ${wrapped} ${wrapped < 100 ? "(retour au début)" : "(ne revient pas)"}`);
+      });
+      console.log(`  après défilement manuel : scrollLeft = ${scrolled} ${scrolled > 20 ? "(OK, scrollable)" : "(PROBLÈME)"}`);
     }
   }
 
