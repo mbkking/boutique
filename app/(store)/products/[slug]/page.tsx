@@ -23,6 +23,7 @@ import { Price } from "@/components/ui/price";
 import { ProductCardGrid } from "@/components/product/product-card";
 import { PurchasePanel } from "@/app/(store)/products/[slug]/purchase-panel";
 import { ShareButton } from "@/components/store/share-button";
+import { getSiteName, getBranding } from "@/lib/data/site";
 
 export const revalidate = 0;
 
@@ -75,6 +76,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     stock_on_hand: product.stock_on_hand,
     stock_reserved: product.stock_reserved,
   });
+  const [siteName, branding] = await Promise.all([getSiteName(), getBranding()]);
 
   const breadcrumb = [
     { name: "Accueil", href: "/" },
@@ -252,6 +254,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 title={product.name}
                 text={`${product.name} — ${formatPrice(product.price)}, paiement à la livraison à Niamey.`}
                 url={`${SITE_URL}/products/${product.slug}`}
+                imageUrl={product.images[0]?.url ?? null}
+                price={product.price}
+                compareAtPrice={product.compare_at_price}
+                siteName={siteName}
+                logoUrl={branding.brand_logo_url || undefined}
                 variant="ghost"
               />
             </div>

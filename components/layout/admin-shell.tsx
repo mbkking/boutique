@@ -25,6 +25,7 @@ import {
 import { cn } from "@/lib/utils";
 import { can, canAny, PERMISSIONS, type Permission } from "@/lib/auth/permissions";
 import { SignOutButton } from "@/app/_components/sign-out-button";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 import {
   buildAdminBackgroundStyle,
   buildAdminThemeVariables,
@@ -215,6 +216,8 @@ export function AdminShell({
           </button>
 
           <div className="flex-1" />
+
+          <NotificationBell variant="admin" listHref="/admin/orders" detailBase="/admin/orders/" />
 
           <div className="relative">
             <button

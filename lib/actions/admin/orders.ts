@@ -5,7 +5,7 @@ import {
   AUDIT_ACTIONS,
   logAuditEntry,
 } from "@/lib/services/audit";
-import { notifyOrderStatusChange } from "@/lib/services/notifications";
+import { notifyOrderStatusChange, notifyDriverAssigned } from "@/lib/services/notifications";
 import { canTransitionTo, getOrderStatusLabel } from "@/lib/services/orders";
 import { releaseStock } from "@/lib/services/inventory";
 import { createAdminClient, type SupabaseAdminClient } from "@/lib/supabase/server";
@@ -317,6 +317,14 @@ export async function assignDeliveryAction(
     status: "ASSIGNED",
     notes: `Affectation à ${driverRow.full_name}.`,
     created_by: auth.profile.id,
+  });
+
+  // Le livreur reçoit sa mission dans sa cloche de notifications. L'échec d'une
+  // notification ne doit jamais invalider l'affectation elle-même.
+  await notifyDriverAssigned({
+    driverId: driverRow.id,
+    orderId: order.id,
+    orderNumber: order.order_number,
   });
 
   return success({

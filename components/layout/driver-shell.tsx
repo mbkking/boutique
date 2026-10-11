@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SignOutButton } from "@/app/_components/sign-out-button";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 
 export interface DriverShellProps {
   fullName: string;
@@ -157,6 +158,8 @@ export function DriverShell({
           </button>
 
           <div className="flex-1" />
+
+          <NotificationBell variant="driver" listHref={missionsHref} detailBase={null} />
 
           <div className="relative">
             <button

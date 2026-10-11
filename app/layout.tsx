@@ -10,6 +10,7 @@ import { AOSProvider } from "@/components/ui/aos-provider";
 import { getSiteName, getBranding } from "@/lib/data/site";
 import { listActiveDeliveryZones } from "@/lib/data/delivery-zones";
 import { VisitTracker } from "@/components/layout/visit-tracker";
+import { PwaInstallBanner } from "@/components/layout/pwa-install";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -69,6 +70,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           <ServiceWorkerRegistrar />
           <VisitTracker />
+          <PwaInstallBanner logoUrl={branding.brand_logo_url || undefined} />
           <CartProvider>
             <AOSProvider>
               <a

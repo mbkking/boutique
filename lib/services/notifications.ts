@@ -318,17 +318,74 @@ export async function notifyOrderStatusChange(input: {
   });
 }
 
+/**
+ * Identifiants de profil des rôles qui traitent les commandes.
+ *
+ * Une notification interne doit atterrir dans une boîte précise : un `user_id`
+ * `null` ne serait rattaché à personne et resterait invisible. On éclate donc
+ * l'envoi sur chaque administrateur/opérateur actif.
+ */
+async function listStaffProfileIds(): Promise<string[]> {
+  try {
+    const { createAdminClient } = await import("@/lib/supabase/server");
+    const supabase = await createAdminClient();
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("id")
+      .in("role", ["admin", "order_operator"])
+      .eq("is_active", true);
+
+    if (error) {
+      logger.warn("notification: listage des destinataires internes impossible", {
+        error: error.message,
+      });
+      return [];
+    }
+
+    return (data ?? []).map((row) => row.id);
+  } catch (error) {
+    logger.warn("notification: listage des destinataires internes impossible", { error });
+    return [];
+  }
+}
+
 /** Notification interne destinée aux rôles qui traitent les commandes. */
 export async function notifyNewOrder(
   orderId: string,
   orderNumber: string,
   amount: number
 ): Promise<void> {
+  const title = "Nouvelle commande";
+  const body = `Commande ${orderNumber} — ${amount.toLocaleString("fr-FR")} XOF, à confirmer.`;
+
+  const staff = await listStaffProfileIds();
+
+  // Aucun administrateur actif : on écrit tout de même une trace interne, mais
+  // sans destinataire — utile aux journaux, jamais affichée à un client.
+  if (staff.length === 0) {
+    await dispatchNotification({ event: "NEW_ORDER_ADMIN", orderId, title, body });
+    return;
+  }
+
+  await Promise.all(
+    staff.map((userId) =>
+      dispatchNotification({ event: "NEW_ORDER_ADMIN", orderId, userId, title, body })
+    )
+  );
+}
+
+/** Notification du livreur auquel une livraison vient d'être affectée. */
+export async function notifyDriverAssigned(input: {
+  driverId: string;
+  orderId: string;
+  orderNumber: string;
+}): Promise<void> {
   await dispatchNotification({
-    event: "NEW_ORDER_ADMIN",
-    orderId,
-    title: "Nouvelle commande",
-    body: `Commande ${orderNumber} — ${amount.toLocaleString("fr-FR")} XOF, à confirmer.`,
+    event: "ORDER_ASSIGNED",
+    orderId: input.orderId,
+    userId: input.driverId,
+    title: "Nouvelle livraison",
+    body: `Commande ${input.orderNumber} vous a été affectée.`,
   });
 }
 

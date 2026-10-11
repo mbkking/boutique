@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/cart/cart-provider";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 import {
   getHeaderRoleAction,
   signOutAction,
@@ -255,6 +256,14 @@ export function Header({
           >
             <Search aria-hidden="true" className="size-5" />
           </Link>
+
+          {isCustomer ? (
+            <NotificationBell
+              variant="store"
+              listHref="/account/orders"
+              detailBase="/account/orders/"
+            />
+          ) : null}
 
           <button
             type="button"

@@ -35,6 +35,9 @@ import { Price } from "@/components/ui/price";
 import { formatPrice } from "@/lib/services/pricing";
 import { cn } from "@/lib/utils";
 
+/** Ville proposée par défaut : la zone de livraison historique. */
+const DEFAULT_CITY = "Niamey";
+
 /**
  * Validation de la partie « client » du formulaire.
  * Le payload complet est revalidé côté serveur par `orderCreateSchema`.
@@ -42,6 +45,7 @@ import { cn } from "@/lib/utils";
 const checkoutFormSchema = z.object({
   full_name: z.string().trim().min(2, "Le nom complet est requis").max(120),
   phone: phoneSchema,
+  city: z.string().trim().min(2, "La ville est requise").max(120),
   quarter: z.string().trim().min(1, "Le quartier est requis"),
   landmark: z.string().trim().min(1, "Le repère est requis"),
   sector: z.string().trim().max(120),
@@ -55,6 +59,7 @@ type CheckoutFormValues = z.input<typeof checkoutFormSchema>;
 const EMPTY_FORM: CheckoutFormValues = {
   full_name: "",
   phone: "",
+  city: DEFAULT_CITY,
   quarter: "",
   landmark: "",
   sector: "",
@@ -62,8 +67,6 @@ const EMPTY_FORM: CheckoutFormValues = {
   notes: "",
   coupon_code: "",
 };
-
-const DEFAULT_CITY = "Niamey";
 
 /**
  * Clé d'idempotence de la tentative de commande en cours.
@@ -378,7 +381,7 @@ export function CheckoutView({ quarters, zones, captchaSiteKey = "" }: CheckoutV
       })),
       full_name: parsed.data.full_name,
       phone: parsed.data.phone,
-      city: DEFAULT_CITY,
+      city: parsed.data.city,
       quarter: parsed.data.quarter,
       landmark: parsed.data.landmark,
       sector: parsed.data.sector.length > 0 ? parsed.data.sector : null,
@@ -522,9 +525,11 @@ export function CheckoutView({ quarters, zones, captchaSiteKey = "" }: CheckoutV
                   <Input
                     label="Ville"
                     name="city"
-                    defaultValue={DEFAULT_CITY}
-                    readOnly
-                    hint="Nous livrons pour le moment à Niamey et ses quartiers."
+                    required
+                    value={values.city}
+                    onChange={(event) => updateField("city", event.target.value)}
+                    error={fieldErrors.city ?? null}
+                    hint="Indiquez la ville où vous vous trouvez. Niamey est proposée par défaut."
                   />
 
                   {quarters.length > 0 ? (
@@ -634,7 +639,7 @@ export function CheckoutView({ quarters, zones, captchaSiteKey = "" }: CheckoutV
                     <div className="flex justify-between gap-4">
                       <dt className="text-text-muted">Adresse</dt>
                       <dd className="text-right font-medium text-text">
-                        {`${values.quarter}${values.sector ? `, ${values.sector}` : ""} — ${DEFAULT_CITY}`}
+                        {`${values.quarter}${values.sector ? `, ${values.sector}` : ""} — ${values.city}`}
                       </dd>
                     </div>
                     <div className="flex justify-between gap-4">
