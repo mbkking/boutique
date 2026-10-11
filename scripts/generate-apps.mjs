@@ -58,7 +58,7 @@ const APPS = {
       "politique-de-retour",
       "reinitialiser-mot-de-passe",
     ],
-    api: ["api/track"],
+    api: ["api/track", "api/pwa"],
     rootRoutes: ["robots.ts", "sitemap.ts", "manifest.ts"],
     layout: "store",
     label: "Boutique client",
