@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { OrderStatusBadge, PaymentStatusBadge } from "@/components/ui/status-badge";
+import { RealtimeRefresh } from "@/components/realtime/realtime-refresh";
 import { AccountSubnav } from "@/app/(account)/account/subnav";
 import { cn } from "@/lib/utils";
 
@@ -58,6 +59,11 @@ export default async function AccountOrdersPage({
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6">
+      {/* Les statuts de commande se mettent à jour sans rechargement manuel. */}
+      <RealtimeRefresh
+        bindings={[{ table: "orders", filter: `customer_id=eq.${customer.id}` }]}
+      />
+
       <header className="flex flex-col gap-2">
         <h1 className="text-2xl font-bold text-text sm:text-3xl">Mes commandes</h1>
         <p className="text-sm text-text-muted">

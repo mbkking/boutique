@@ -6,7 +6,7 @@ import { getAuthenticatedUser } from "@/lib/supabase/session";
 import { getDriverMission } from "@/lib/data/driver";
 import { getDeliveryStatusLabel } from "@/lib/services/orders";
 import { formatPrice } from "@/lib/services/pricing";
-import { formatPhoneForDisplay, buildTelLink } from "@/lib/platform/native";
+import { formatPhoneForDisplay, buildTelLink, buildNavigationUrl } from "@/lib/platform/native";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DeliveryStatusBadge } from "@/components/ui/status-badge";
 import { MissionActions } from "@/app/(delivery)/driver/deliveries/[id]/mission-actions";
@@ -54,14 +54,24 @@ export default async function DriverMissionPage({ params }: MissionPageProps) {
 
   const address = mission.address;
 
+  // Position transmise par le client (ou coordonnées de l'adresse) : sert de
+  // destination de navigation, affichée ici en plus des actions de mission.
+  const navigation = buildNavigationUrl({
+    latitude: mission.hasCoordinates ? mission.latitude : null,
+    longitude: mission.hasCoordinates ? mission.longitude : null,
+    label: `${address.landmark}, ${address.city}`,
+  });
+
   return (
     <div className="flex flex-col gap-5">
       {/* Changement de statut (par le livreur ou l'administration) : la
-          mission affichée suit l'événement sans rechargement. */}
+          mission affichée suit l'événement sans rechargement. La position du
+          client, inscrite sur la commande, arrive aussi en temps réel. */}
       <RealtimeRefresh
         bindings={[
           { table: "deliveries", filter: `id=eq.${mission.id}` },
           { table: "delivery_events", filter: `delivery_id=eq.${mission.id}` },
+          { table: "orders", filter: `id=eq.${mission.orderId}` },
         ]}
       />
 
@@ -119,7 +129,25 @@ export default async function DriverMissionPage({ params }: MissionPageProps) {
             <p className="pl-6 text-gray-600">{address.instructions}</p>
           ) : null}
           {mission.hasCoordinates ? (
-            <p className="pl-6 text-xs text-gray-500">Coordonnées GPS disponibles.</p>
+            <div className="mt-1 flex flex-col gap-1 rounded-lg border border-green-200 bg-green-50 p-3">
+              <p className="flex items-center gap-2 text-sm font-medium text-green-800">
+                <MapPin aria-hidden="true" className="size-4 shrink-0" />
+                Position GPS partagée par le client
+              </p>
+              <p className="pl-6 text-xs text-green-700">
+                {`${mission.latitude?.toFixed(5)}, ${mission.longitude?.toFixed(5)}`}
+              </p>
+              {navigation ? (
+                <a
+                  href={navigation.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="ml-6 inline-flex w-fit items-center gap-1 text-sm font-semibold text-green-800 underline"
+                >
+                  Ouvrir l&apos;itinéraire
+                </a>
+              ) : null}
+            </div>
           ) : null}
           {mission.notes ? (
             <p className="rounded-lg bg-gray-50 p-3 text-xs text-gray-600">

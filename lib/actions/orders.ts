@@ -13,6 +13,8 @@ import { isStockSufficient, getAvailableStock } from "@/lib/services/inventory";
 import { AUDIT_ACTIONS, logAuditEntry } from "@/lib/services/audit";
 import { notifyNewOrder } from "@/lib/services/notifications";
 import { createAdminClient, type SupabaseAdminClient } from "@/lib/supabase/server";
+import { getSessionProfile } from "@/lib/supabase/session";
+import { getCustomerByProfileId } from "@/lib/data/account";
 import { getOrderByIdempotencyKey, getOrderByNumber } from "@/lib/data/orders";
 import { listActiveDeliveryZones } from "@/lib/data/delivery-zones";
 import { listActivePromotions } from "@/lib/data/promotions";
@@ -53,6 +55,18 @@ const orderTrackingInputSchema = z
   .trim()
   .min(3, "Saisissez un numéro de commande valide")
   .max(40, "Numéro de commande trop long");
+
+/**
+ * Position GPS partagée par le client pour guider le livreur.
+ *
+ * Les bornes sont strictes : une latitude/longitude hors domaine est refusée
+ * avant toute écriture, ce qui évite de corrompre l'instantané d'adresse.
+ */
+const shareLocationInputSchema = z.object({
+  orderId: z.string().uuid("Commande invalide."),
+  latitude: z.number().finite().gte(-90).lte(90),
+  longitude: z.number().finite().gte(-180).lte(180),
+});
 
 export interface OrderTrackingResult {
   orderNumber: string;
@@ -481,4 +495,76 @@ export async function trackOrderAction(
   if (!row) return failure("Aucune commande ne correspond à ce numéro. Vérifiez et réessayez.");
 
   return success({ orderNumber: row.order_number });
+}
+
+/** Statuts pour lesquels la position du client n'a plus d'utilité pour le livreur. */
+const LOCATION_CLOSED_STATUSES: readonly Order["status"][] = [
+  "DELIVERED",
+  "CANCELLED",
+  "RETURNED",
+];
+
+/**
+ * Enregistre la position GPS partagée volontairement par le client.
+ *
+ * La position est fusionnée dans l'instantané d'adresse de la commande : le
+ * livreur affecté la lit ensuite comme n'importe quel repère, sans changer
+ * l'adresse déclarée. Le partage n'est accepté que pour une commande non
+ * terminée, et un client connecté ne peut viser qu'une de ses propres
+ * commandes.
+ */
+export async function shareOrderLocationAction(
+  payload: unknown
+): Promise<ActionResult<{ latitude: number; longitude: number }>> {
+  const parsed = shareLocationInputSchema.safeParse(payload);
+  if (!parsed.success) return failure(firstZodMessage(parsed.error.issues));
+
+  const supabase = await getAdminClient();
+  if (!supabase) return failure(SERVICE_UNAVAILABLE);
+
+  const { orderId, latitude, longitude } = parsed.data;
+
+  const outcome = await safeQuery("orders.shareLocation.read", () =>
+    supabase
+      .from("orders")
+      .select("id, customer_id, status, address_snapshot")
+      .eq("id", orderId)
+      .limit(1)
+  );
+
+  const row = toSingle(outcome) as
+    | { id: string; customer_id: string | null; status: Order["status"]; address_snapshot: AddressSnapshot }
+    | null;
+
+  if (!row) return failure("Commande introuvable.");
+  if (LOCATION_CLOSED_STATUSES.includes(row.status)) {
+    return failure("Cette commande est terminée : la position n'est plus utile.");
+  }
+
+  // Un client connecté ne peut cibler qu'une commande qui lui appartient.
+  const profile = await getSessionProfile();
+  if (profile) {
+    const customer = await getCustomerByProfileId(profile.id);
+    if (customer && row.customer_id && row.customer_id !== customer.id) {
+      return failure("Cette commande ne vous appartient pas.");
+    }
+  }
+
+  const snapshot = (row.address_snapshot ?? {}) as AddressSnapshot;
+  const nextSnapshot: AddressSnapshot = { ...snapshot, latitude, longitude };
+
+  const { error } = await supabase
+    .from("orders")
+    .update({
+      address_snapshot: nextSnapshot,
+      updated_at: new Date().toISOString(),
+    })
+    .eq("id", orderId);
+
+  if (error) {
+    console.warn("[orders] partage de position refusé :", error.message);
+    return failure("La position n'a pas pu être enregistrée. Réessayez.");
+  }
+
+  return success({ latitude, longitude });
 }

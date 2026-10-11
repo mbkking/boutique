@@ -19,6 +19,7 @@ import {
   OrderStatusBadge,
   PaymentStatusBadge,
 } from "@/components/ui/status-badge";
+import { ShareLocationButton } from "@/components/store/share-location-button";
 
 interface OrderTrackingPageProps {
   params: Promise<{ id: string }>;
@@ -84,6 +85,10 @@ export default async function OrderTrackingPage({ params }: OrderTrackingPagePro
   const address = order.address_snapshot;
   const isCancelled = order.status === "CANCELLED";
   const isDelivered = order.status === "DELIVERED";
+  const isReturned = order.status === "RETURNED";
+  const locationClosed = isCancelled || isDelivered || isReturned;
+  const hasLocation =
+    typeof address.latitude === "number" && typeof address.longitude === "number";
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-4 py-8 sm:px-6">
@@ -307,6 +312,17 @@ export default async function OrderTrackingPage({ params }: OrderTrackingPagePro
               <p className="mt-4 rounded-lg bg-surface-alt p-3 text-sm text-text-muted">
                 {`Votre message : ${order.notes}`}
               </p>
+            ) : null}
+
+            {!locationClosed ? (
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="mb-2 text-xs text-text-muted">
+                  {hasLocation
+                    ? "Votre position est transmise au livreur. Vous pouvez la mettre à jour."
+                    : "Pour faciliter la livraison, partagez votre position GPS avec le livreur."}
+                </p>
+                <ShareLocationButton orderId={order.id} hasLocation={hasLocation} />
+              </div>
             ) : null}
           </CardContent>
         </Card>

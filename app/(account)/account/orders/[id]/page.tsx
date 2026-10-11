@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, MapPin } from "lucide-react";
+import { RealtimeRefresh } from "@/components/realtime/realtime-refresh";
 import { getSessionProfile } from "@/lib/supabase/session";
 import { getCustomerByProfileId } from "@/lib/data/account";
 import { getOrderDetailsForCustomer } from "@/lib/data/orders";
@@ -10,6 +11,7 @@ import { getOrderStatusLabel, getPaymentStatusLabel } from "@/lib/services/order
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { OrderStatusBadge, PaymentStatusBadge } from "@/components/ui/status-badge";
+import { ShareLocationButton } from "@/components/store/share-location-button";
 
 export const metadata: Metadata = {
   title: "Détail de ma commande",
@@ -58,8 +60,25 @@ export default async function AccountOrderDetailPage({
   const { order, items, history } = details;
   const address = order.address_snapshot;
 
+  // Tant que la commande n'est pas terminée, le client peut guider le livreur
+  // en partageant sa position GPS.
+  const locationClosed =
+    order.status === "DELIVERED" ||
+    order.status === "CANCELLED" ||
+    order.status === "RETURNED";
+  const hasLocation =
+    typeof address.latitude === "number" && typeof address.longitude === "number";
+
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6">
+      {/* Le statut et la position évoluent sans rechargement de la page. */}
+      <RealtimeRefresh
+        bindings={[
+          { table: "orders", filter: `id=eq.${order.id}` },
+          { table: "deliveries", filter: `order_id=eq.${order.id}` },
+        ]}
+      />
+
       <div>
         <Link
           href="/account/orders"
@@ -157,6 +176,17 @@ export default async function AccountOrderDetailPage({
               <span>{address.landmark}</span>
               {address.instructions ? <span>{address.instructions}</span> : null}
             </address>
+
+            {!locationClosed ? (
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="mb-2 text-xs text-text-muted">
+                  {hasLocation
+                    ? "Votre position est transmise au livreur. Vous pouvez la mettre à jour."
+                    : "Pour faciliter la livraison, partagez votre position GPS avec le livreur."}
+                </p>
+                <ShareLocationButton orderId={order.id} hasLocation={hasLocation} />
+              </div>
+            ) : null}
           </CardContent>
         </Card>
 

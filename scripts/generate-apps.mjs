@@ -39,6 +39,7 @@ const ROUTE_FILES = new Set([
   "sitemap.ts",
   "manifest.ts",
   "route.ts",
+  "opengraph-image.tsx",
 ]);
 
 const APPS = {
@@ -138,7 +139,7 @@ function reexportContent(relativePath, appName) {
 
   const directive = CLIENT_ROUTE_FILES.has(relativePath) ? '"use client";\n\n' : "";
 
-  return `${directive}/**
+  const header = `${directive}/**
  * Route de l'application \`${appName}\`, ré-exportée depuis le code partagé.
  *
  * Source : \`${relativePath}\` (dépôt racine).
@@ -146,7 +147,22 @@ function reexportContent(relativePath, appName) {
  * Aucun code métier n'est dupliqué : l'application ne fait que déclarer
  * qu'elle sert cette route, avec son propre contexte Next.
  */
-export * from "${target}";
+`;
+
+  // Les routes d'image Open Graph doivent déclarer leur configuration
+  // (`size`, `contentType`, `alt`) au niveau du fichier : Next les lit
+  // statiquement, un simple `export *` ne suffirait pas.
+  if (relativePath.endsWith("opengraph-image.tsx")) {
+    return `${header}export const runtime = "nodejs";
+export const size = { width: 1200, height: 630 };
+export const contentType = "image/png";
+export const alt = "Aperçu du produit";
+
+export { default } from "${target}";
+`;
+  }
+
+  return `${header}export * from "${target}";
 ${
   // Un gestionnaire de route (`route.ts`) n'expose que des méthodes nommées
   // (`GET`, `POST`…) : il n'a pas d'export par défaut à ré-exporter.

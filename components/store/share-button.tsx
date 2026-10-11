@@ -84,9 +84,12 @@ export function ShareButton({
   }, [state]);
 
   const handleShare = useCallback(async () => {
-    // L'URL par défaut n'est lisible que côté client ; la résoudre au moment du
-    // clic évite un état intermédiaire calculé dans un effet.
-    const target = url || window.location.href;
+    // L'URL peut être relative (`/products/…`) : la résoudre contre l'origine
+    // réelle au moment du clic garantit un lien correct en production, sans
+    // dépendre de `NEXT_PUBLIC_APP_URL`.
+    const target = url
+      ? new URL(url, window.location.origin).toString()
+      : window.location.href;
 
     // 1) Carte image + lien.
     if (imageUrl && typeof price === "number") {

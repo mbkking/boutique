@@ -19,6 +19,8 @@ import { getOrderStatusLabel, getPaymentStatusLabel } from "@/lib/services/order
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/ui/empty-state";
 import { OrderStatusBadge, PaymentStatusBadge } from "@/components/ui/status-badge";
+import { RealtimeRefresh } from "@/components/realtime/realtime-refresh";
+import { buildNavigationUrl } from "@/lib/platform/native";
 import { OrderRowActions } from "@/app/(admin)/admin/orders/order-row-actions";
 
 export const metadata = {
@@ -74,8 +76,24 @@ export default async function AdminOrderDetailPage({ params }: AdminOrderDetailP
   const address = order.address_snapshot;
   const role = profile.role;
 
+  const hasCoordinates =
+    typeof address.latitude === "number" && typeof address.longitude === "number";
+  const navigation = buildNavigationUrl({
+    latitude: hasCoordinates ? address.latitude : null,
+    longitude: hasCoordinates ? address.longitude : null,
+    label: `${address.landmark}, ${address.city}`,
+  });
+
   return (
     <div className="flex flex-col gap-6">
+      {/* Statut, livraison et position du client suivent la base sans rechargement. */}
+      <RealtimeRefresh
+        bindings={[
+          { table: "orders", filter: `id=eq.${order.id}` },
+          { table: "deliveries", filter: `order_id=eq.${order.id}` },
+        ]}
+      />
+
       <Link
         href="/admin/orders"
         className="inline-flex w-fit items-center gap-1 text-sm text-gray-500 hover:text-gray-900"
@@ -174,6 +192,21 @@ export default async function AdminOrderDetailPage({ params }: AdminOrderDetailP
             <p className="font-medium text-gray-900">{address.landmark}</p>
             {address.instructions ? <p>{address.instructions}</p> : null}
             <p className="text-xs text-gray-500">{`Code : ${address.address_code}`}</p>
+            {hasCoordinates ? (
+              <p className="text-xs text-green-700">
+                <span className="font-medium">Position GPS transmise par le client.</span>{" "}
+                {navigation ? (
+                  <a
+                    href={navigation.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold underline"
+                  >
+                    Ouvrir l&apos;itinéraire
+                  </a>
+                ) : null}
+              </p>
+            ) : null}
             {order.notes ? (
               <p className="rounded-lg bg-gray-50 p-3 text-xs text-gray-600">
                 {`Note du client : ${order.notes}`}

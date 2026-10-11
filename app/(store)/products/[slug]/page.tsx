@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
@@ -30,13 +31,39 @@ export const revalidate = 0;
 const SITE_URL =
   process.env.NEXT_PUBLIC_APP_URL?.replace(/\/$/, "") ?? "http://localhost:3000";
 
+/**
+ * Origine réelle de l'instance, lue sur la requête.
+ *
+ * Les aperçus de partage (Facebook, WhatsApp…) exigent des URL absolues vers
+ * l'image Open Graph. Se fier à `NEXT_PUBLIC_APP_URL` produirait un domaine
+ * `localhost` si la variable n'est pas définie en production : on préfère
+ * l'`host` effectivement reçu, avec la configuration en repli.
+ */
+async function resolveSiteUrl(): Promise<string> {
+  try {
+    const store = await headers();
+    const host = store.get("x-forwarded-host") ?? store.get("host");
+    if (host) {
+      const proto = store.get("x-forwarded-proto") ?? "https";
+      return `${proto}://${host}`;
+    }
+  } catch {
+    // Hors contexte de requête (prérendu) : repli sur la configuration.
+  }
+  return SITE_URL;
+}
+
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+  const [product, siteUrl, siteName] = await Promise.all([
+    getProductBySlug(slug),
+    resolveSiteUrl(),
+    getSiteName(),
+  ]);
 
   if (!product) {
     return { title: "Produit introuvable" };
@@ -47,20 +74,26 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
     product.seo_description ||
     product.description.slice(0, 160) ||
     `Achetez ${product.name} à Niamey. Paiement à la livraison.`;
-  const imageUrl = product.images[0]?.url ?? null;
 
   return {
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(siteUrl),
     title,
     description,
     alternates: { canonical: `/products/${product.slug}` },
+    // L'image est fournie par `opengraph-image.tsx` (carte soignée générée à la
+    // volée) : on ne définit pas `images` ici, sinon elle serait ignorée.
     openGraph: {
       type: "website",
       locale: "fr_NE",
-      title: `${title} | ISF NAF-CHOPOP`,
+      siteName,
+      title: `${title} — ${formatPrice(product.price)}`,
       description,
-      url: `${SITE_URL}/products/${product.slug}`,
-      ...(imageUrl ? { images: [{ url: imageUrl, alt: product.name }] } : {}),
+      url: `/products/${product.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} — ${formatPrice(product.price)}`,
+      description,
     },
   };
 }
@@ -76,7 +109,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
     stock_on_hand: product.stock_on_hand,
     stock_reserved: product.stock_reserved,
   });
-  const [siteName, branding] = await Promise.all([getSiteName(), getBranding()]);
+  const [siteName, branding, siteUrl] = await Promise.all([
+    getSiteName(),
+    getBranding(),
+    resolveSiteUrl(),
+  ]);
 
   const breadcrumb = [
     { name: "Accueil", href: "/" },
@@ -97,7 +134,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     description:
       product.seo_description || product.description || product.name,
     imagePath: product.images[0]?.url ?? null,
-    siteUrl: SITE_URL,
+    siteUrl,
     path: `/products/${product.slug}`,
     price: product.price,
     compareAtPrice: product.compare_at_price,
@@ -105,7 +142,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     sku: product.sku,
   });
 
-  const breadcrumbJsonLd = buildBreadcrumbList(breadcrumb, SITE_URL);
+  const breadcrumbJsonLd = buildBreadcrumbList(breadcrumb, siteUrl);
 
   return (
     <div className="mx-auto flex w-full max-w-7xl flex-col gap-10 px-4 py-8 sm:px-6">
@@ -253,7 +290,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <ShareButton
                 title={product.name}
                 text={`${product.name} — ${formatPrice(product.price)}, paiement à la livraison à Niamey.`}
-                url={`${SITE_URL}/products/${product.slug}`}
+                url={`/products/${product.slug}`}
                 imageUrl={product.images[0]?.url ?? null}
                 price={product.price}
                 compareAtPrice={product.compare_at_price}
