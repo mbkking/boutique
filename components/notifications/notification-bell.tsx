@@ -8,6 +8,7 @@ import {
   getMyNotificationsAction,
   type NotificationFeedItem,
 } from "@/lib/actions/notifications";
+import { PushToggle } from "@/components/notifications/push-toggle";
 import { cn } from "@/lib/utils";
 
 /**
@@ -360,6 +361,8 @@ export function NotificationBell({
               </Link>
             </div>
           ) : null}
+
+          <PushToggle variant={variant} />
         </div>
       ) : null}
     </div>

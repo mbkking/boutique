@@ -93,26 +93,150 @@ class InternalChannel implements NotificationChannelAdapter {
   }
 }
 
+/** Ligne d'abonnement lue en base avant envoi. */
+interface PushSubscriptionRow {
+  id: string;
+  endpoint: string;
+  p256dh: string;
+  auth: string;
+  origin: string | null;
+}
+
+/** Préfixe de la page de détail d'une commande selon le rôle du destinataire. */
+function orderPathForRole(role: string | null | undefined): string {
+  if (role === "driver") return "/driver/deliveries/";
+  if (role === "admin" || role === "order_operator" || role === "stock_manager") {
+    return "/admin/orders/";
+  }
+  return "/account/orders/";
+}
+
+/** Construit l'URL à ouvrir au clic, à partir de l'origine où l'abonnement a été pris. */
+function buildClickUrl(origin: string | null, path: string): string {
+  const candidate =
+    origin && /^https?:\/\//.test(origin)
+      ? origin
+      : process.env.NEXT_PUBLIC_APP_URL ?? "";
+  const base = candidate.replace(/\/+$/, "");
+  return base ? `${base}${path}` : path;
+}
+
+/**
+ * Résout le chemin interne vers lequel diriger la notification.
+ * `profiles.role` détermine l'espace (client, admin, livreur) ; la lecture passe
+ * par le client privilégié et n'échoue jamais.
+ */
+async function resolveNotificationPath(message: NotificationMessage): Promise<string> {
+  if (!message.orderId || !message.userId) return "/";
+
+  try {
+    const { createAdminClient } = await import("@/lib/supabase/server");
+    const supabase = await createAdminClient();
+    const { data } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", message.userId)
+      .maybeSingle();
+
+    return `${orderPathForRole(data?.role ?? null)}${message.orderId}`;
+  } catch {
+    return `/account/orders/${message.orderId}`;
+  }
+}
+
 /**
  * Web push.
  *
- * La table d'abonnement et la clé VAPID ne sont pas configurées : le canal se
- * déclare donc indisponible plutôt que de laisser croire à des notifications
- * qui ne partiraient jamais.
+ * Le canal est disponible dès que les deux clés VAPID sont présentes. À
+ * l'envoi, il récupère les abonnements du destinataire et remet le message au
+ * service de push de chaque navigateur. Un abonnement périmé (404/410) est
+ * supprimé : c'est ainsi qu'on oublie un appareil désinstallé.
  */
 class PushChannel implements NotificationChannelAdapter {
   readonly channel: NotificationChannel = "PUSH";
 
   isAvailable(): boolean {
-    return Boolean(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY);
+    return Boolean(
+      process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY
+    );
   }
 
-  async dispatch(): Promise<NotificationChannelResult> {
-    return {
-      channel: this.channel,
-      status: "skipped",
-      reason: "Push non configuré",
+  async dispatch(message: NotificationMessage): Promise<NotificationChannelResult> {
+    if (!message.userId) {
+      return { channel: this.channel, status: "skipped", reason: "destinataire inconnu" };
+    }
+
+    const publicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY?.trim();
+    const privateKey = process.env.VAPID_PRIVATE_KEY?.trim();
+    if (!publicKey || !privateKey) {
+      return { channel: this.channel, status: "skipped", reason: "Push non configuré" };
+    }
+
+    const { createAdminClient } = await import("@/lib/supabase/server");
+    const supabase = await createAdminClient();
+
+    const { data, error } = await supabase
+      .from("push_subscriptions")
+      .select("id, endpoint, p256dh, auth, origin")
+      .eq("user_id", message.userId);
+
+    if (error) {
+      logger.warn("push: lecture des abonnements impossible", { error: error.message });
+      return { channel: this.channel, status: "skipped", reason: error.message };
+    }
+
+    const subscriptions = (data ?? []) as PushSubscriptionRow[];
+    if (subscriptions.length === 0) {
+      return { channel: this.channel, status: "skipped", reason: "aucun abonnement" };
+    }
+
+    const path = await resolveNotificationPath(message);
+    const basePayload = {
+      title: message.title,
+      body: message.body,
+      tag: message.orderId ? `order-${message.orderId}` : message.event,
     };
+
+    const webpush = (await import("web-push")).default;
+    webpush.setVapidDetails(
+      process.env.VAPID_SUBJECT?.trim() || "mailto:contact@isf-naf-chopop.ne",
+      publicKey,
+      privateKey
+    );
+
+    let sent = 0;
+    const staleIds: string[] = [];
+
+    await Promise.all(
+      subscriptions.map(async (row) => {
+        try {
+          await webpush.sendNotification(
+            {
+              endpoint: row.endpoint,
+              keys: { p256dh: row.p256dh, auth: row.auth },
+            },
+            // Le service worker relit `data.url` au clic ; on l'injecte ici.
+            JSON.stringify({ ...basePayload, url: buildClickUrl(row.origin, path) })
+          );
+          sent += 1;
+        } catch (error) {
+          const statusCode = (error as { statusCode?: number }).statusCode;
+          if (statusCode === 404 || statusCode === 410) {
+            staleIds.push(row.id);
+          } else {
+            logger.warn("push: envoi refusé", { statusCode, error });
+          }
+        }
+      })
+    );
+
+    if (staleIds.length > 0) {
+      await supabase.from("push_subscriptions").delete().in("id", staleIds);
+    }
+
+    return sent > 0
+      ? { channel: this.channel, status: "sent" }
+      : { channel: this.channel, status: "skipped", reason: "aucun envoi abouti" };
   }
 }
 
